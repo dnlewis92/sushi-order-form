@@ -29,24 +29,31 @@
         <div class="section-title">Basic Rolls</div>
 
         <div class="roll-item">
-            <span class="roll-title">California Roll</span> - <span class="roll-subtext">Crab, Avocado, Cucumber</span>
-            <br>Price: <span class="price">$6.00</span>
+            <span class="roll-title">California Girl</span> - <span class="roll-subtext">California Roll</span>
+            <br>Price: <span class="price">$8.00</span>
             <br>Quantity: <input type="number" class="input-box" id="roll1-qty" value="0" min="0" onchange="calculateTotal()">
         </div>
 
         <div class="roll-item">
-            <span class="roll-title">Spicy Tuna Roll</span> - <span class="roll-subtext">Tuna, Spicy Mayo, Cucumber</span>
-            <br>Price: <span class="price">$7.00</span>
+            <span class="roll-title">Jersey Boy</span> - <span class="roll-subtext">Spicy Salmon, Avocado</span>
+            <br>Price: <span class="price">$9.00</span>
             <br>Quantity: <input type="number" class="input-box" id="roll2-qty" value="0" min="0" onchange="calculateTotal()">
         </div>
     </div>
 
+        <div class="roll-item">
+            <span class="roll-title">The Grove</span> - <span class="roll-subtext"> Spicy Tuna, Cucumber, Avocado</span>
+            <br>Price: <span class="price">$9.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="roll2-qty" value="0" min="0" onchange="calculateTotal()">
+        </div>
+    </div>
+    
     <!-- Fancy Rolls Section -->
     <div class="roll-section">
         <div class="section-title">Fancy Rolls</div>
 
         <div class="roll-item">
-            <span class="roll-title">Dragon Roll</span> - <span class="roll-subtext">Eel, Avocado, Cucumber, Eel Sauce</span>
+            <span class="roll-title">Dragon Roll</span> - <span class="roll-subtext">California Roll Topped with Spicy Salmon and Crispy Onions</span>
             <br>Price: <span class="price">$14.00</span>
             <br>Quantity: <input type="number" class="input-box" id="roll3-qty" value="0" min="0" onchange="calculateTotal()">
         </div>
@@ -66,11 +73,12 @@
         <input type="text" id="custom-roll-name" placeholder="e.g. The Volcano">
         <br><label for="custom-roll-description">Select ingredients:</label>
         <div class="checkbox-item">
-            <input type="checkbox" id="ingredient1" name="ingredient" value="Tuna"> Tuna ($3.00)<br>
+            <input type="checkbox" id="ingredient1" name="ingredient" value="Tuna"> Tuna ($5.00)<br>
             <input type="checkbox" id="ingredient2" name="ingredient" value="Salmon"> Salmon ($2.50)<br>
             <input type="checkbox" id="ingredient3" name="ingredient" value="Avocado"> Avocado ($1.00)<br>
             <input type="checkbox" id="ingredient4" name="ingredient" value="Cucumber"> Cucumber ($1.00)<br>
             <input type="checkbox" id="ingredient5" name="ingredient" value="Spicy Mayo"> Spicy Mayo ($0.50)<br>
+              <input type="checkbox" id="ingredient5" name="ingredient" value="Spicy Mayo"> Spicy Mayo ($0.50)<br>
         </div>
         <br>Base Price: <span class="price">$10.00</span> (additional ingredient prices apply)
         <br>Quantity: <input type="number" class="input-box" id="custom-roll-qty" value="0" min="0" onchange="calculateTotal()">
