@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cookin' With The Lewises Order Form</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        body { font-family: Arial, sans-serif; background-color: #f9f7e8; padding: 20px; }
         h1 { text-align: center; }
         .roll-section { margin-bottom: 20px; }
         .section-title { font-size: 1.5em; font-weight: bold; margin-bottom: 10px; }
         .roll-item { margin-bottom: 10px; }
         .roll-title { font-weight: bold; }
         .roll-subtext { font-style: italic; color: gray; }
-        .price { color: green; }
+        .price { color: green; font-weight: bold; }
         .order-summary { margin-top: 30px; padding: 10px; border: 1px solid #ccc; background-color: #fff; }
         .total { font-weight: bold; font-size: 1.2em; margin-top: 20px; }
         .submit-btn { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; }
@@ -66,13 +66,13 @@
         <input type="text" id="custom-roll-name" placeholder="e.g. The Volcano">
         <br><label for="custom-roll-description">Select ingredients:</label>
         <div class="checkbox-item">
-            <input type="checkbox" id="ingredient1" name="ingredient" value="Tuna"> Tuna<br>
-            <input type="checkbox" id="ingredient2" name="ingredient" value="Salmon"> Salmon<br>
-            <input type="checkbox" id="ingredient3" name="ingredient" value="Avocado"> Avocado<br>
-            <input type="checkbox" id="ingredient4" name="ingredient" value="Cucumber"> Cucumber<br>
-            <input type="checkbox" id="ingredient5" name="ingredient" value="Spicy Mayo"> Spicy Mayo<br>
+            <input type="checkbox" id="ingredient1" name="ingredient" value="Tuna"> Tuna ($3.00)<br>
+            <input type="checkbox" id="ingredient2" name="ingredient" value="Salmon"> Salmon ($2.50)<br>
+            <input type="checkbox" id="ingredient3" name="ingredient" value="Avocado"> Avocado ($1.00)<br>
+            <input type="checkbox" id="ingredient4" name="ingredient" value="Cucumber"> Cucumber ($1.00)<br>
+            <input type="checkbox" id="ingredient5" name="ingredient" value="Spicy Mayo"> Spicy Mayo ($0.50)<br>
         </div>
-        <br>Price: <span class="price">$20.00</span>
+        <br>Base Price: <span class="price">$10.00</span> (additional ingredient prices apply)
         <br>Quantity: <input type="number" class="input-box" id="custom-roll-qty" value="0" min="0" onchange="calculateTotal()">
     </div>
 
@@ -80,10 +80,10 @@
     <div class="roll-section">
         <div class="section-title">Crispy Rice Options</div>
         <div class="checkbox-item">
-            <input type="checkbox" id="crispy1" name="crispy" value="Tuna"> Tuna<br>
-            <input type="checkbox" id="crispy2" name="crispy" value="Salmon"> Salmon<br>
-            <input type="checkbox" id="crispy3" name="crispy" value="Spicy Tuna"> Spicy Tuna<br>
-            <input type="checkbox" id="crispy4" name="crispy" value="Avocado"> Avocado<br>
+            <input type="checkbox" id="crispy1" name="crispy" value="Tuna"> Tuna ($2.00)<br>
+            <input type="checkbox" id="crispy2" name="crispy" value="Salmon"> Salmon ($1.50)<br>
+            <input type="checkbox" id="crispy3" name="crispy" value="Spicy Tuna"> Spicy Tuna ($2.50)<br>
+            <input type="checkbox" id="crispy4" name="crispy" value="Avocado"> Avocado ($1.00)<br>
         </div>
     </div>
 
@@ -108,9 +108,17 @@
             const roll2Price = 7.00;
             const roll3Price = 14.00;
             const roll4Price = 16.00;
-            const customRollPrice = 20.00;
+            const customRollPrice = 10.00;
 
-            const total = (roll1Qty * roll1Price) + (roll2Qty * roll2Price) + (roll3Qty * roll3Price) + (roll4Qty * roll4Price) + (customRollQty * customRollPrice);
+            // Ingredient prices
+            let customRollIngredientsPrice = 0;
+            document.querySelectorAll('input[name="ingredient"]:checked').forEach((item) => {
+                customRollIngredientsPrice += parseFloat(item.value.split(" ")[1]);
+            });
+
+            const total = (roll1Qty * roll1Price) + (roll2Qty * roll2Price) + 
+                          (roll3Qty * roll3Price) + (roll4Qty * roll4Price) + 
+                          (customRollQty * (customRollPrice + customRollIngredientsPrice));
 
             document.getElementById('total-price').innerText = total.toFixed(2);
 
@@ -121,12 +129,12 @@
             if (roll4Qty > 0) summaryDetails += `${roll4Qty}x Rainbow Roll<br>`;
             if (customRollQty > 0) {
                 const customName = document.getElementById('custom-roll-name').value || 'Custom Roll';
-                const ingredients = [...document.querySelectorAll('input[name="ingredient"]:checked')].map(e => e.value).join(', ') || 'Custom ingredients';
+                const ingredients = [...document.querySelectorAll('input[name="ingredient"]:checked')].map(e => e.value.split(" ")[0]).join(', ') || 'Custom ingredients';
                 summaryDetails += `${customRollQty}x ${customName} (${ingredients})<br>`;
             }
-            
+
             // Crispy Rice Section
-            const crispySelections = [...document.querySelectorAll('input[name="crispy"]:checked')].map(e => e.value).join(', ');
+            const crispySelections = [...document.querySelectorAll('input[name="crispy"]:checked')].map(e => e.value.split(" ")[0]).join(', ');
             if (crispySelections) summaryDetails += `Crispy Rice Options: ${crispySelections}<br>`;
 
             document.getElementById('summary-details').innerHTML = summaryDetails || 'No items selected';
@@ -135,6 +143,4 @@
         function submitOrder() {
             alert('Order Submitted!');
         }
-    </script>
-</body>
-</html>
+   
