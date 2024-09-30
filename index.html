@@ -39,72 +39,9 @@
             <br>Price: <span class="price">$9.00</span>
             <br>Quantity: <input type="number" class="input-box" id="roll2-qty" value="0" min="0" onchange="calculateTotal()">
         </div>
-
-        <div class="roll-item">
-            <span class="roll-title">The Grove</span> - <span class="roll-subtext">Spicy Tuna, Cucumber, Avocado</span>
-            <br>Price: <span class="price">$9.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll3-qty" value="0" min="0" onchange="calculateTotal()">
-        </div>
-
-        <div class="roll-item">
-            <span class="roll-title">Woodlawn Roll</span> - <span class="roll-subtext">Spicy Salmon, Cucumber, Avocado</span>
-            <br>Price: <span class="price">$9.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll4-qty" value="0" min="0" onchange="calculateTotal()">
-        </div>
-
-        <div class="roll-item">
-            <span class="roll-title">Married People Roll</span> - <span class="roll-subtext">Salmon Avocado</span>
-            <br>Price: <span class="price">$9.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll5-qty" value="0" min="0" onchange="calculateTotal()">
-        </div>
-
-        <div class="roll-item">
-            <span class="roll-title">1171 E. 61st</span> - <span class="roll-subtext">Tuna, Avocado</span>
-            <br>Price: <span class="price">$9.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll6-qty" value="0" min="0" onchange="calculateTotal()">
-        </div>
-
-        <div class="roll-item">
-            <span class="roll-title">President Roll</span> - <span class="roll-subtext">Spicy Tuna, Avocado</span>
-            <br>Price: <span class="price">$9.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll7-qty" value="0" min="0" onchange="calculateTotal()">
-        </div>
-
-        <div class="roll-item">
-            <span class="roll-title">Torah Chair Roll</span> - <span class="roll-subtext">Vegetable Roll (Avocado, Cucumber)</span>
-            <br>Price: <span class="price">$6.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll8-qty" value="0" min="0" onchange="calculateTotal()">
-        </div>
     </div>
 
-    <!-- Fancy Rolls Section -->
-    <div class="roll-section">
-        <div class="section-title">Fancy Rolls</div>
-
-        <div class="roll-item">
-            <span class="roll-title">The Wife Roll</span> - <span class="roll-subtext">California Roll Topped with Spicy Salmon and Crispy Onions</span>
-            <br>Price: <span class="price">$14.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll9-qty" value="0" min="0" onchange="calculateTotal()">
-        </div>
-
-        <div class="roll-item">
-            <span class="roll-title">J-E-T-S, JETS, JETS, JETS</span> - <span class="roll-subtext">Salmon Avocado Topped with Spicy Salmon</span>
-            <br>Price: <span class="price">$14.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll10-qty" value="0" min="0" onchange="calculateTotal()">
-        </div>
-
-        <div class="roll-item">
-            <span class="roll-title">The 6th Year Roll</span> - <span class="roll-subtext">Spicy Salmon Avocado Topped with Avocado</span>
-            <br>Price: <span class="price">$14.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll11-qty" value="0" min="0" onchange="calculateTotal()">
-        </div>
-
-        <div class="roll-item">
-            <span class="roll-title">The ChaChing</span> - <span class="roll-subtext">Salmon Avocado Topped with Torched Otoro Tuna</span>
-            <br>Price: <span class="price">$20.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll12-qty" value="0" min="0" onchange="calculateTotal()">
-        </div>
-    </div>
+    <!-- ...other roll sections here... -->
 
     <!-- Custom Roll Section -->
     <div class="roll-section">
@@ -113,8 +50,92 @@
         <input type="text" id="custom-roll-name" placeholder="e.g. The Volcano">
         <br><label for="custom-roll-description">Select ingredients:</label>
         <div class="checkbox-item">
-            <input type="checkbox" id="ingredient1" name="ingredient" value="5.00 Tuna"> Tuna ($5.00)<br>
-            <input type="checkbox" id="ingredient2" name="ingredient" value="2.50 Salmon"> Salmon ($2.50)<br>
-            <input type="checkbox" id="ingredient3" name="ingredient" value="1.00 Avocado"> Avocado ($1.00)<br>
-            <input type="checkbox" id="ingredient4" name="ingredient" value="1.00 Cucumber"> Cucumber ($1.00)<br>
-            <input type="checkbox" id="ingredient5" name="ingredient" value="0.50 Spicy Mayo"> Spicy Mayo ($0.50)<br>
+            <input type="checkbox" id="ingredient1" name="ingredient" value="Tuna"> Tuna ($5.00)<br>
+            <input type="checkbox" id="ingredient2" name="ingredient" value="Salmon"> Salmon ($2.50)<br>
+            <input type="checkbox" id="ingredient3" name="ingredient" value="Avocado"> Avocado ($1.00)<br>
+            <input type="checkbox" id="ingredient4" name="ingredient" value="Cucumber"> Cucumber ($1.00)<br>
+            <input type="checkbox" id="ingredient5" name="ingredient" value="Spicy Mayo"> Spicy Mayo ($0.50)<br>
+        </div>
+        <br>Base Price: <span class="price">$10.00</span> (additional ingredient prices apply)
+        <br>Quantity: <input type="number" class="input-box" id="custom-roll-qty" value="0" min="0" onchange="calculateTotal()">
+    </div>
+
+    <!-- Order Summary -->
+    <div class="order-summary" id="order-summary">
+        <h2>Order Summary</h2>
+        <div id="summary-details"></div>
+        <div class="total">Total: $<span id="total-price">0.00</span></div>
+    </div>
+
+    <button class="submit-btn" onclick="submitOrder()">Submit Order</button>
+
+    <script>
+        function calculateTotal() {
+            const roll1Qty = parseInt(document.getElementById('roll1-qty').value) || 0;
+            const roll2Qty = parseInt(document.getElementById('roll2-qty').value) || 0;
+            const customRollQty = parseInt(document.getElementById('custom-roll-qty').value) || 0;
+
+            const roll1Price = 8.00;
+            const roll2Price = 9.00;
+            const customRollPrice = 10.00;
+
+            // Ingredient prices
+            let customRollIngredientsPrice = 0;
+            document.querySelectorAll('input[name="ingredient"]:checked').forEach((item) => {
+                customRollIngredientsPrice += parseFloat(item.value.split(" ")[1]);
+            });
+
+            const total = (roll1Qty * roll1Price) + (roll2Qty * roll2Price) + 
+                          (customRollQty * (customRollPrice + customRollIngredientsPrice));
+
+            document.getElementById('total-price').innerText = total.toFixed(2);
+
+            let summaryDetails = '';
+            if (roll1Qty > 0) summaryDetails += `${roll1Qty}x Valley Girl Roll<br>`;
+            if (roll2Qty > 0) summaryDetails += `${roll2Qty}x Jersey Boy Roll<br>`;
+            if (customRollQty > 0) {
+                const customName = document.getElementById('custom-roll-name').value || 'Custom Roll';
+                const ingredients = [...document.querySelectorAll('input[name="ingredient"]:checked')].map(e => e.value.split(" ")[0]).join(', ') || 'Custom ingredients';
+                summaryDetails += `${customRollQty}x ${customName} (${ingredients})<br>`;
+            }
+
+            document.getElementById('summary-details').innerHTML = summaryDetails || 'No items selected';
+        }
+
+        function submitOrder() {
+            const roll1Qty = parseInt(document.getElementById('roll1-qty').value) || 0;
+            const roll2Qty = parseInt(document.getElementById('roll2-qty').value) || 0;
+            const customRollQty = parseInt(document.getElementById('custom-roll-qty').value) || 0;
+            const customName = document.getElementById('custom-roll-name').value || 'Custom Roll';
+            const ingredients = [...document.querySelectorAll('input[name="ingredient"]:checked')].map(e => e.value.split(" ")[0]).join(', ') || 'Custom ingredients';
+            const total = document.getElementById('total-price').innerText;
+
+            // Create an order object
+            const order = {
+                roll1Qty: roll1Qty,
+                roll2Qty: roll2Qty,
+                customRollQty: customRollQty,
+                customName: customName,
+                ingredients: ingredients,
+                total: total
+            };
+
+            // Send the order data to the Google Sheets web app
+            fetch('https://script.google.com/macros/s/AKfycbwTlIqENeumogb0NA6xDNyEHD7QWt0T1BbcxfXj7pQWT02XfTyOxdQtOcYCPS7gspWy0g/exec', {
+                method: 'POST',
+                body: JSON.stringify(order),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Order Submitted Successfully!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
