@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookin' With The Lewises - Sushi Order Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        h1 { text-align: center; }
+        .roll-section { margin-bottom: 20px; }
+        .roll-title { font-size: 1.5em; font-weight: bold; }
+        .roll-subtext { font-style: italic; color: gray; margin-bottom: 5px; }
+        .price { color: green; }
+        .order-summary { margin-top: 30px; padding: 10px; border: 1px solid #ccc; background-color: #fff; }
+        .total { font-weight: bold; font-size: 1.2em; margin-top: 20px; }
+        .submit-btn { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <h1>Sushi Order Form</h1>
+
+    <!-- Example roll option with custom name and description -->
+    <div class="roll-section">
+        <span class="roll-title">The Rock n' Roll</span> - <span class="roll-subtext">Salmon Avocado</span>
+        <br>Price: <span class="price">$12.00</span>
+        <br>Quantity: <input type="number" id="roll1-qty" value="0" min="0" onchange="calculateTotal()">
+    </div>
+
+    <div class="roll-section">
+        <span class="roll-title">Tuna Delight</span> - <span class="roll-subtext">Bluefin Tuna, Avocado</span>
+        <br>Price: <span class="price">$14.00</span>
+        <br>Quantity: <input type="number" id="roll2-qty" value="0" min="0" onchange="calculateTotal()">
+    </div>
+
+    <div class="roll-section">
+        <span class="roll-title">Spicy Crunch</span> - <span class="roll-subtext">Spicy Tuna, Crispy Onions</span>
+        <br>Price: <span class="price">$13.00</span>
+        <br>Quantity: <input type="number" id="roll3-qty" value="0" min="0" onchange="calculateTotal()">
+    </div>
+
+    <!-- Custom Roll Section -->
+    <div class="roll-section">
+        <span class="roll-title">Custom Roll</span> - <span class="roll-subtext">Create your own roll</span>
+        <br>Price: <span class="price">$15.00</span>
+        <br>Quantity: <input type="number" id="custom-roll-qty" value="0" min="0" onchange="calculateTotal()">
+    </div>
+
+    <!-- Order Summary -->
+    <div class="order-summary" id="order-summary">
+        <h2>Order Summary</h2>
+        <div id="summary-details"></div>
+        <div class="total">Total: $<span id="total-price">0.00</span></div>
+    </div>
+
+    <button class="submit-btn" onclick="submitOrder()">Submit Order</button>
+
+    <script>
+        function calculateTotal() {
+            const roll1Qty = parseInt(document.getElementById('roll1-qty').value) || 0;
+            const roll2Qty = parseInt(document.getElementById('roll2-qty').value) || 0;
+            const roll3Qty = parseInt(document.getElementById('roll3-qty').value) || 0;
+            const customRollQty = parseInt(document.getElementById('custom-roll-qty').value) || 0;
+
+            const roll1Price = 12.00;
+            const roll2Price = 14.00;
+            const roll3Price = 13.00;
+            const customRollPrice = 15.00;
+
+            const total = (roll1Qty * roll1Price) + (roll2Qty * roll2Price) + (roll3Qty * roll3Price) + (customRollQty * customRollPrice);
+
+            document.getElementById('total-price').innerText = total.toFixed(2);
+
+            let summaryDetails = '';
+            if (roll1Qty > 0) summaryDetails += `${roll1Qty}x The Rock n' Roll<br>`;
+            if (roll2Qty > 0) summaryDetails += `${roll2Qty}x Tuna Delight<br>`;
+            if (roll3Qty > 0) summaryDetails += `${roll3Qty}x Spicy Crunch<br>`;
+            if (customRollQty > 0) summaryDetails += `${customRollQty}x Custom Roll<br>`;
+
+            document.getElementById('summary-details').innerHTML = summaryDetails || 'No items selected';
+        }
+
+        function submitOrder() {
+            alert('Order Submitted!');
+        }
+    </script>
+</body>
+</html>
