@@ -24,6 +24,12 @@
 
     <h1>Cookin' With The Lewises Order Form</h1>
 
+    <!-- Name Input -->
+    <div>
+        <label for="customer-name">Your Name:</label>
+        <input type="text" id="customer-name" placeholder="Enter your name" onchange="updateSummary()">
+    </div>
+
     <!-- Basic Rolls Section -->
     <div class="roll-section">
         <div class="section-title">Basic Rolls</div>
@@ -106,38 +112,103 @@
         </div>
     </div>
 
+    <!-- Crispy Rice Section -->
+    <div class="roll-section">
+        <div class="section-title">Crispy Rice</div>
+
+        <div class="roll-item">
+            <span class="roll-title">Crispy Salmon</span>
+            <br>Price: <span class="price">$12.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="crispy1-qty" value="0" min="0" onchange="calculateTotal()">
+        </div>
+
+        <div class="roll-item">
+            <span class="roll-title">Crispy Tuna</span>
+            <br>Price: <span class="price">$12.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="crispy2-qty" value="0" min="0" onchange="calculateTotal()">
+        </div>
+    </div>
+
+    <!-- Nigiri Section -->
+    <div class="roll-section">
+        <div class="section-title">Nigiri</div>
+
+        <div class="roll-item">
+            <span class="roll-title">Salmon Nigiri</span>
+            <br>Price: <span class="price">$6.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="nigiri1-qty" value="0" min="0" onchange="calculateTotal()">
+        </div>
+
+        <div class="roll-item">
+            <span class="roll-title">Tuna Nigiri</span>
+            <br>Price: <span class="price">$6.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="nigiri2-qty" value="0" min="0" onchange="calculateTotal()">
+        </div>
+    </div>
+
     <!-- Order Summary -->
-    <div class="order-summary" id="order-summary">
+    <div class="order-summary">
         <h2>Order Summary</h2>
-        <div id="summary-details"></div>
-        <div class="total">Total: $<span id="total-price">0.00</span></div>
+        <p id="order-summary-details"></p>
+        <div class="total">Total: $<span id="total-amount">0.00</span></div>
     </div>
 
     <button class="submit-btn" onclick="submitOrder()">Submit Order</button>
 
     <script>
         function calculateTotal() {
-            const rollPrices = [8, 9, 9, 9, 9, 9, 9, 6, 14, 14, 14, 20];
+            const prices = [8, 9, 9, 9, 9, 9, 9, 6, 14, 14, 14, 20, 12, 12, 6, 6];
             let total = 0;
-            let summaryDetails = '';
 
-            // Loop through all rolls to calculate total and update summary
+            // Calculate total for all rolls and extras
             for (let i = 1; i <= 12; i++) {
-                const rollQty = parseInt(document.getElementById(`roll${i}-qty`).value) || 0;
-                total += rollQty * rollPrices[i - 1];
-                if (rollQty > 0) {
-                    const rollTitle = document.querySelector(`#roll${i}-qty`).parentElement.querySelector('.roll-title').innerText;
-                    summaryDetails += `${rollQty}x ${rollTitle}<br>`;
+                total += document.getElementById(`roll${i}-qty`).value * prices[i - 1];
+            }
+            total += document.getElementById('crispy1-qty').value * prices[12];
+            total += document.getElementById('crispy2-qty').value * prices[13];
+            total += document.getElementById('nigiri1-qty').value * prices[14];
+            total += document.getElementById('nigiri2-qty').value * prices[15];
+
+            document.getElementById('total-amount').textContent = total.toFixed(2);
+            updateSummary();
+        }
+
+        function updateSummary() {
+            const rolls = [
+                "Valley Girl", "Jersey Boy", "The Grove", "Woodlawn Roll", "Married People Roll", 
+                "1171 E. 61st", "President Roll", "Torah Chair Roll", "The Wife Roll", 
+                "J-E-T-S", "The 6th Year Roll", "The ChaChing", "Crispy Salmon", "Crispy Tuna", 
+                "Salmon Nigiri", "Tuna Nigiri"
+            ];
+
+            let summaryDetails = 'Name: ' + document.getElementById('customer-name').value + '<br>';
+
+            for (let i = 1; i <= 12; i++) {
+                let qty = document.getElementById(`roll${i}-qty`).value;
+                if (qty > 0) {
+                    summaryDetails += `${qty}x ${rolls[i - 1]}<br>`;
                 }
             }
 
-            document.getElementById('total-price').innerText = total.toFixed(2);
-            document.getElementById('summary-details').innerHTML = summaryDetails;
+            let crispyQty1 = document.getElementById('crispy1-qty').value;
+            if (crispyQty1 > 0) summaryDetails += `${crispyQty1}x Crispy Salmon<br>`;
+
+            let crispyQty2 = document.getElementById('crispy2-qty').value;
+            if (crispyQty2 > 0) summaryDetails += `${crispyQty2}x Crispy Tuna<br>`;
+
+            let nigiriQty1 = document.getElementById('nigiri1-qty').value;
+            if (nigiriQty1 > 0) summaryDetails += `${nigiriQty1}x Salmon Nigiri<br>`;
+
+            let nigiriQty2 = document.getElementById('nigiri2-qty').value;
+            if (nigiriQty2 > 0) summaryDetails += `${nigiriQty2}x Tuna Nigiri<br>`;
+
+            document.getElementById('order-summary-details').innerHTML = summaryDetails;
         }
 
         function submitOrder() {
             alert('Order submitted!');
         }
     </script>
+
 </body>
 </html>
