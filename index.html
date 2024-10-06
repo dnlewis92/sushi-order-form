@@ -18,6 +18,15 @@
         .submit-btn { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; }
         .input-box { width: 50px; }
         .checkbox-item { margin-bottom: 10px; }
+        /* Two-column layout */
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .column {
+            flex: 50%;
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
@@ -30,73 +39,75 @@
         <input type="text" id="customer-name" placeholder="Enter your name">
     </div>
 
-    <!-- Basic Rolls Section -->
-    <div class="roll-section">
-        <div class="section-title">Basic Rolls</div>
-        <div class="roll-item" id="roll1">
-            <span class="roll-title">Valley Girl</span> - <span class="roll-subtext">California Roll</span>
-            <br>Price: <span class="price">$8.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll1-qty" value="0" min="0">
+    <div class="form-container">
+        <!-- Basic Rolls Section -->
+        <div class="roll-section column">
+            <div class="section-title">Basic Rolls</div>
+            <div class="roll-item" id="roll1">
+                <span class="roll-title">Valley Girl</span> - <span class="roll-subtext">California Roll</span>
+                <br>Price: <span class="price">$8.00</span>
+                <br>Quantity: <input type="number" class="input-box" id="roll1-qty" value="0" min="0">
+            </div>
+            <div class="roll-item" id="roll2">
+                <span class="roll-title">Jersey Boy</span> - <span class="roll-subtext">Spicy Salmon, Avocado</span>
+                <br>Price: <span class="price">$9.00</span>
+                <br>Quantity: <input type="number" class="input-box" id="roll2-qty" value="0" min="0">
+            </div>
+            <div class="roll-item" id="roll3">
+                <span class="roll-title">The Grove</span> - <span class="roll-subtext">Spicy Tuna, Cucumber, Avocado</span>
+                <br>Price: <span class="price">$9.00</span>
+                <br>Quantity: <input type="number" class="input-box" id="roll3-qty" value="0" min="0">
+            </div>
+            <div class="roll-item" id="roll4">
+                <span class="roll-title">Japanese Garden</span> - <span class="roll-subtext">Spicy Salmon, Cucumber, Avocado</span>
+                <br>Price: <span class="price">$9.00</span>
+                <br>Quantity: <input type="number" class="input-box" id="roll4-qty" value="0" min="0">
+            </div>
+            <div class="roll-item" id="roll5">
+                <span class="roll-title">Rocky Roll</span> - <span class="roll-subtext">Salmon, Avocado</span>
+                <br>Price: <span class="price">$9.00</span>
+                <br>Quantity: <input type="number" class="input-box" id="roll5-qty" value="0" min="0">
+            </div>
+            <div class="roll-item" id="roll6">
+                <span class="roll-title">Gotham Chi Roll</span> - <span class="roll-subtext">Tuna, Avocado</span>
+                <br>Price: <span class="price">$9.00</span>
+                <br>Quantity: <input type="number" class="input-box" id="roll6-qty" value="0" min="0">
+            </div>
+            <div class="roll-item" id="roll7">
+                <span class="roll-title">President Roll</span> - <span class="roll-subtext">Spicy Tuna, Avocado</span>
+                <br>Price: <span class="price">$9.00</span>
+                <br>Quantity: <input type="number" class="input-box" id="roll7-qty" value="0" min="0">
+            </div>
+            <div class="roll-item" id="roll8">
+                <span class="roll-title">Torah Chair Roll</span> - <span class="roll-subtext">Vegetable Roll (Avocado, Cucumber)</span>
+                <br>Price: <span class="price">$6.00</span>
+                <br>Quantity: <input type="number" class="input-box" id="roll8-qty" value="0" min="0">
+            </div>
         </div>
-        <div class="roll-item" id="roll2">
-            <span class="roll-title">Jersey Boy</span> - <span class="roll-subtext">Spicy Salmon, Avocado</span>
-            <br>Price: <span class="price">$9.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll2-qty" value="0" min="0">
-        </div>
-        <div class="roll-item" id="roll3">
-            <span class="roll-title">The Grove</span> - <span class="roll-subtext">Spicy Tuna, Cucumber, Avocado</span>
-            <br>Price: <span class="price">$9.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll3-qty" value="0" min="0">
-        </div>
-        <div class="roll-item" id="roll4">
-            <span class="roll-title">Japanese Garden</span> - <span class="roll-subtext">Spicy Salmon, Cucumber, Avocado</span>
-            <br>Price: <span class="price">$9.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll4-qty" value="0" min="0">
-        </div>
-        <div class="roll-item" id="roll5">
-            <span class="roll-title">Rocky Roll</span> - <span class="roll-subtext">Salmon, Avocado</span>
-            <br>Price: <span class="price">$9.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll5-qty" value="0" min="0">
-        </div>
-        <div class="roll-item" id="roll6">
-            <span class="roll-title">Gotham Chi Roll</span> - <span class="roll-subtext">Tuna, Avocado</span>
-            <br>Price: <span class="price">$9.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll6-qty" value="0" min="0">
-        </div>
-        <div class="roll-item" id="roll7">
-            <span class="roll-title">President Roll</span> - <span class="roll-subtext">Spicy Tuna, Avocado</span>
-            <br>Price: <span class="price">$9.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll7-qty" value="0" min="0">
-        </div>
-        <div class="roll-item" id="roll8">
-            <span class="roll-title">Torah Chair Roll</span> - <span class="roll-subtext">Vegetable Roll (Avocado, Cucumber)</span>
-            <br>Price: <span class="price">$6.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll8-qty" value="0" min="0">
-        </div>
-    </div>
 
-    <!-- Fancy Rolls Section -->
-    <div class="roll-section">
-        <div class="section-title">Fancy Rolls</div>
-        <div class="roll-item" id="roll9">
-            <span class="roll-title">The Wife Role</span> - <span class="roll-subtext">California Roll Topped with Spicy Salmon and Crispy Onions</span>
-            <br>Price: <span class="price">$14.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll9-qty" value="0" min="0">
-        </div>
-        <div class="roll-item" id="roll10">
-            <span class="roll-title">The Husband Role</span> - <span class="roll-subtext">Salmon Avocado Topped with Spicy Salmon</span>
-            <br>Price: <span class="price">$14.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll10-qty" value="0" min="0">
-        </div>
-        <div class="roll-item" id="roll11">
-            <span class="roll-title">The 6th Year Roll</span> - <span class="roll-subtext">Spicy Salmon Avocado Topped with Avocado</span>
-            <br>Price: <span class="price">$14.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll11-qty" value="0" min="0">
-        </div>
-        <div class="roll-item" id="roll12">
-            <span class="roll-title">The ChaChing</span> - <span class="roll-subtext">Salmon Avocado Topped with Torched Otoro Tuna</span>
-            <br>Price: <span class="price">$20.00</span>
-            <br>Quantity: <input type="number" class="input-box" id="roll12-qty" value="0" min="0">
+        <!-- Fancy Rolls Section -->
+        <div class="roll-section column">
+            <div class="section-title">Fancy Rolls</div>
+            <div class="roll-item" id="roll9">
+                <span class="roll-title">The Wife Roll</span> - <span class="roll-subtext">California Roll Topped with Spicy Salmon and Crispy Onions</span>
+                <br>Price: <span class="price">$14.00</span>
+                <br>Quantity: <input type="number" class="input-box" id="roll9-qty" value="0" min="0">
+            </div>
+            <div class="roll-item" id="roll10">
+                <span class="roll-title">The Husband Roll</span> - <span class="roll-subtext">Salmon Avocado Topped with Spicy Salmon</span>
+                <br>Price: <span class="price">$14.00</span>
+                <br>Quantity: <input type="number" class="input-box" id="roll10-qty" value="0" min="0">
+            </div>
+            <div class="roll-item" id="roll11">
+                <span class="roll-title">The 6th Year Roll</span> - <span class="roll-subtext">Spicy Salmon Avocado Topped with Avocado</span>
+                <br>Price: <span class="price">$14.00</span>
+                <br>Quantity: <input type="number" class="input-box" id="roll11-qty" value="0" min="0">
+            </div>
+            <div class="roll-item" id="roll12">
+                <span class="roll-title">The ChaChing</span> - <span class="roll-subtext">Salmon Avocado Topped with Torched Otoro Tuna</span>
+                <br>Price: <span class="price">$20.00</span>
+                <br>Quantity: <input type="number" class="input-box" id="roll12-qty" value="0" min="0">
+            </div>
         </div>
     </div>
 
@@ -123,79 +134,104 @@
 
     <!-- Sashimi Section -->
     <div class="roll-section">
-        <div class="section-title">Sashimi (5 pieces per order)</div>
+        <div class="section-title">Sashimi, 5 pieces per order</div>
         <div class="checkbox-item">
             <input type="checkbox" id="sashimi-salmon" name="sashimi" value="Salmon"> Salmon ($12.00)<br>
-            <input type="checkbox" id="sashimi-tuna" name="sashimi" value="Tuna"> Tuna ($14.00)<br>
-            <input type="checkbox" id="sashimi-otoro" name="sashimi" value="Otoro Tuna"> Otoro Tuna ($20.00)<br>
+            <input type="checkbox" id="sashimi-bluefin" name="sashimi" value="Bluefin Tuna"> Bluefin Tuna ($16.00)<br>
+            <input type="checkbox" id="sashimi-otoro" name="sashimi" value="Otoro Tuna"> Otoro Tuna ($22.00)<br>
             Quantity: <input type="number" class="input-box" id="sashimi-qty" value="0" min="0">
         </div>
     </div>
 
     <!-- Comment Section -->
-    <div class="roll-section">
-        <div class="section-title">Comments</div>
-        <textarea id="comments" rows="4" cols="50" placeholder="Any extra notes or special requests"></textarea>
+    <div>
+        <label for="comment">Additional Comments:</label>
+        <textarea id="comment" rows="4" cols="50" placeholder="Leave extra notes or customization requests"></textarea>
     </div>
 
-    <!-- Order Summary -->
-    <div class="order-summary" id="order-summary">
-        <h3>Order Summary</h3>
-        <p id="summary-text">No items selected.</p>
-        <div class="total">Total: <span id="total">$0.00</span></div>
+    <div class="order-summary">
+        <div class="section-title">Order Summary:</div>
+        <pre id="summary"></pre>
+        <div class="total">Total: $<span id="total-cost">0.00</span></div>
     </div>
 
     <button class="submit-btn" onclick="submitOrder()">Submit Order</button>
 
     <script>
-        function calculateTotal() {
-            // Calculation logic for total cost
-        }
-
         function submitOrder() {
-            const orderSummary = generateOrderSummary();
-            const customerName = document.getElementById("customer-name").value;
-            const comments = document.getElementById("comments").value;
+            // Order Summary Logic
+            var summary = "";
+            var totalCost = 0;
+            var customerName = document.getElementById("customer-name").value;
+            
+            summary += "Customer Name: " + customerName + "\n\n";
+            
+            var rolls = [
+                { id: "roll1", name: "Valley Girl", price: 8.00 },
+                { id: "roll2", name: "Jersey Boy", price: 9.00 },
+                { id: "roll3", name: "The Grove", price: 9.00 },
+                { id: "roll4", name: "Japanese Garden", price: 9.00 },
+                { id: "roll5", name: "Rocky Roll", price: 9.00 },
+                { id: "roll6", name: "Gotham Chi Roll", price: 9.00 },
+                { id: "roll7", name: "President Roll", price: 9.00 },
+                { id: "roll8", name: "Torah Chair Roll", price: 6.00 },
+                { id: "roll9", name: "The Wife Roll", price: 14.00 },
+                { id: "roll10", name: "The Husband Roll", price: 14.00 },
+                { id: "roll11", name: "The 6th Year Roll", price: 14.00 },
+                { id: "roll12", name: "The ChaChing", price: 20.00 }
+            ];
 
-            // Data to send to Google Sheets
-            const data = {
-                customerName: customerName,
-                orderSummary: orderSummary,
-                comments: comments,
-            };
-
-            // Submit data to Google Sheet
-            fetch('https://script.google.com/macros/s/AKfycbwTlIqENeumogb0NA6xDNyEHD7QWt0T1BbcxfXj7pQWT02XfTyOxdQtOcYCPS7gspWy0g/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => {
-                alert('Order submitted successfully!');
-                clearForm();
-            })
-            .catch(error => {
-                console.error('Error:', error);
+            rolls.forEach(function (roll) {
+                var qty = parseInt(document.getElementById(roll.id + "-qty").value);
+                if (qty > 0) {
+                    summary += roll.name + " x" + qty + " - $" + (roll.price * qty).toFixed(2) + "\n";
+                    totalCost += roll.price * qty;
+                }
             });
-        }
 
-        function generateOrderSummary() {
-            // Function to generate the order summary
-            let summary = "";
-            // Add logic to capture selected rolls, nigiri, crispy rice, sashimi, etc.
-            return summary;
-        }
+            // Crispy Rice
+            var crispyOptions = [
+                { id: "crispy1", name: "Spicy Tuna Crispy Rice", price: 12.00 },
+                { id: "crispy2", name: "Spicy Salmon Crispy Rice", price: 12.00 }
+            ];
 
-        function clearForm() {
-            // Function to reset the form after submission
-            document.getElementById("customer-name").value = "";
-            document.getElementById("comments").value = "";
-            // Reset other form fields if needed
+            crispyOptions.forEach(function (option) {
+                if (document.getElementById(option.id).checked) {
+                    var qty = parseInt(document.getElementById("crispy-qty").value);
+                    if (qty > 0) {
+                        summary += option.name + " x" + qty + " - $" + (option.price * qty).toFixed(2) + "\n";
+                        totalCost += option.price * qty;
+                    }
+                }
+            });
+
+            // Sashimi
+            var sashimiOptions = [
+                { id: "sashimi-salmon", name: "Salmon Sashimi", price: 12.00 },
+                { id: "sashimi-bluefin", name: "Bluefin Tuna Sashimi", price: 16.00 },
+                { id: "sashimi-otoro", name: "Otoro Tuna Sashimi", price: 22.00 }
+            ];
+
+            sashimiOptions.forEach(function (option) {
+                if (document.getElementById(option.id).checked) {
+                    var qty = parseInt(document.getElementById("sashimi-qty").value);
+                    if (qty > 0) {
+                        summary += option.name + " x" + qty + " - $" + (option.price * qty).toFixed(2) + "\n";
+                        totalCost += option.price * qty;
+                    }
+                }
+            });
+
+            // Additional comments
+            var comment = document.getElementById("comment").value;
+            if (comment) {
+                summary += "\nComments: " + comment + "\n";
+            }
+
+            // Update Summary and Total Cost
+            document.getElementById("summary").textContent = summary;
+            document.getElementById("total-cost").textContent = totalCost.toFixed(2);
         }
     </script>
-
 </body>
 </html>
