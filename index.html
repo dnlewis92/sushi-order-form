@@ -1,36 +1,201 @@
-<!-- Sashimi Section -->
-<div class="roll-section">
-    <div class="section-title">Sashimi (5 pieces per order)</div>
-    <div class="checkbox-item">
-        <input type="checkbox" id="sashimi-salmon" name="sashimi" value="Salmon"> Salmon ($12.00)<br>
-        <input type="checkbox" id="sashimi-tuna" name="sashimi" value="Tuna"> Tuna ($14.00)<br>
-        <input type="checkbox" id="sashimi-otoro" name="sashimi" value="Otoro Tuna"> Otoro Tuna ($20.00)<br>
-        Quantity: <input type="number" class="input-box" id="sashimi-qty" value="0" min="0" onchange="calculateTotal()">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookin' With The Lewises Order Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f9f7e8; padding: 20px; }
+        h1 { text-align: center; }
+        .roll-section { margin-bottom: 20px; }
+        .section-title { font-size: 1.5em; font-weight: bold; margin-bottom: 10px; }
+        .roll-item { margin-bottom: 10px; }
+        .roll-title { font-weight: bold; }
+        .roll-subtext { font-style: italic; color: gray; }
+        .price { color: green; font-weight: bold; }
+        .order-summary { margin-top: 30px; padding: 10px; border: 1px solid #ccc; background-color: #fff; }
+        .total { font-weight: bold; font-size: 1.2em; margin-top: 20px; }
+        .submit-btn { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        .input-box { width: 50px; }
+        .checkbox-item { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>Cookin' With The Lewises Order Form</h1>
+
+    <!-- Customer Name Input -->
+    <div>
+        <label for="customer-name">Your Name:</label>
+        <input type="text" id="customer-name" placeholder="Enter your name">
     </div>
-</div>
 
-<!-- Comment Section -->
-<div class="roll-section">
-    <div class="section-title">Comments</div>
-    <textarea id="comments" rows="4" cols="50" placeholder="Any extra notes or special requests"></textarea>
-</div>
+    <!-- Basic Rolls Section -->
+    <div class="roll-section">
+        <div class="section-title">Basic Rolls</div>
+        <div class="roll-item" id="roll1">
+            <span class="roll-title">Valley Girl</span> - <span class="roll-subtext">California Roll</span>
+            <br>Price: <span class="price">$8.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="roll1-qty" value="0" min="0">
+        </div>
+        <div class="roll-item" id="roll2">
+            <span class="roll-title">Jersey Boy</span> - <span class="roll-subtext">Spicy Salmon, Avocado</span>
+            <br>Price: <span class="price">$9.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="roll2-qty" value="0" min="0">
+        </div>
+        <div class="roll-item" id="roll3">
+            <span class="roll-title">The Grove</span> - <span class="roll-subtext">Spicy Tuna, Cucumber, Avocado</span>
+            <br>Price: <span class="price">$9.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="roll3-qty" value="0" min="0">
+        </div>
+        <div class="roll-item" id="roll4">
+            <span class="roll-title">Woodlawn Roll</span> - <span class="roll-subtext">Spicy Salmon, Cucumber, Avocado</span>
+            <br>Price: <span class="price">$9.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="roll4-qty" value="0" min="0">
+        </div>
+        <div class="roll-item" id="roll5">
+            <span class="roll-title">Married People Roll</span> - <span class="roll-subtext">Salmon, Avocado</span>
+            <br>Price: <span class="price">$9.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="roll5-qty" value="0" min="0">
+        </div>
+        <div class="roll-item" id="roll6">
+            <span class="roll-title">1171 E. 61st</span> - <span class="roll-subtext">Tuna, Avocado</span>
+            <br>Price: <span class="price">$9.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="roll6-qty" value="0" min="0">
+        </div>
+        <div class="roll-item" id="roll7">
+            <span class="roll-title">President Roll</span> - <span class="roll-subtext">Spicy Tuna, Avocado</span>
+            <br>Price: <span class="price">$9.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="roll7-qty" value="0" min="0">
+        </div>
+        <div class="roll-item" id="roll8">
+            <span class="roll-title">Torah Chair Roll</span> - <span class="roll-subtext">Vegetable Roll (Avocado, Cucumber)</span>
+            <br>Price: <span class="price">$6.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="roll8-qty" value="0" min="0">
+        </div>
+    </div>
 
-<!-- Order Summary -->
-<div class="order-summary" id="order-summary">
-    <h3>Order Summary</h3>
-    <p id="summary-text">No items selected.</p>
-    <div class="total">Total: <span id="total">$0.00</span></div>
-</div>
+    <!-- Fancy Rolls Section -->
+    <div class="roll-section">
+        <div class="section-title">Fancy Rolls</div>
+        <div class="roll-item" id="roll9">
+            <span class="roll-title">The Wife Roll</span> - <span class="roll-subtext">California Roll Topped with Spicy Salmon and Crispy Onions</span>
+            <br>Price: <span class="price">$14.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="roll9-qty" value="0" min="0">
+        </div>
+        <div class="roll-item" id="roll10">
+            <span class="roll-title">J-E-T-S, JETS, JETS, JETS</span> - <span class="roll-subtext">Salmon Avocado Topped with Spicy Salmon</span>
+            <br>Price: <span class="price">$14.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="roll10-qty" value="0" min="0">
+        </div>
+        <div class="roll-item" id="roll11">
+            <span class="roll-title">The 6th Year Roll</span> - <span class="roll-subtext">Spicy Salmon Avocado Topped with Avocado</span>
+            <br>Price: <span class="price">$14.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="roll11-qty" value="0" min="0">
+        </div>
+        <div class="roll-item" id="roll12">
+            <span class="roll-title">The ChaChing</span> - <span class="roll-subtext">Salmon Avocado Topped with Torched Otoro Tuna</span>
+            <br>Price: <span class="price">$20.00</span>
+            <br>Quantity: <input type="number" class="input-box" id="roll12-qty" value="0" min="0">
+        </div>
+    </div>
 
-<button class="submit-btn" onclick="submitOrder()">Submit Order</button>
+    <!-- Nigiri Section -->
+    <div class="roll-section">
+        <div class="section-title">Nigiri, 4 pieces per order</div>
+        <div class="checkbox-item">
+            <input type="checkbox" id="nigiri-salmon" name="nigiri" value="Salmon"> Salmon ($10.00)<br>
+            <input type="checkbox" id="nigiri-bluefin" name="nigiri" value="Bluefin Tuna"> Bluefin Tuna ($14.00)<br>
+            <input type="checkbox" id="nigiri-otoro" name="nigiri" value="Otoro Tuna"> Otoro Tuna ($20.00)<br>
+            Quantity: <input type="number" class="input-box" id="nigiri-qty" value="0" min="0">
+        </div>
+    </div>
 
-<script>
-    function calculateTotal() {
-        // Calculation logic for total cost
-    }
+    <!-- Crispy Rice Section -->
+    <div class="roll-section">
+        <div class="section-title">Crispy Rice Options</div>
+        <div class="checkbox-item">
+            <input type="checkbox" id="crispy1" name="crispy" value="Spicy Tuna Crispy Rice"> Spicy Tuna Crispy Rice ($12.00)<br>
+            <input type="checkbox" id="crispy2" name="crispy" value="Spicy Salmon Crispy Rice"> Spicy Salmon Crispy Rice ($12.00)<br>
+            Quantity: <input type="number" class="input-box" id="crispy-qty" value="0" min="0">
+        </div>
+    </div>
 
-    function submitOrder() {
-        // Function to handle form submission
-        // Send the order summary to the Google Sheet
-    }
-</script>
+    <!-- Sashimi Section -->
+    <div class="roll-section">
+        <div class="section-title">Sashimi (5 pieces per order)</div>
+        <div class="checkbox-item">
+            <input type="checkbox" id="sashimi-salmon" name="sashimi" value="Salmon"> Salmon ($12.00)<br>
+            <input type="checkbox" id="sashimi-tuna" name="sashimi" value="Tuna"> Tuna ($14.00)<br>
+            <input type="checkbox" id="sashimi-otoro" name="sashimi" value="Otoro Tuna"> Otoro Tuna ($20.00)<br>
+            Quantity: <input type="number" class="input-box" id="sashimi-qty" value="0" min="0">
+        </div>
+    </div>
+
+    <!-- Comment Section -->
+    <div class="roll-section">
+        <div class="section-title">Comments</div>
+        <textarea id="comments" rows="4" cols="50" placeholder="Any extra notes or special requests"></textarea>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="order-summary" id="order-summary">
+        <h3>Order Summary</h3>
+        <p id="summary-text">No items selected.</p>
+        <div class="total">Total: <span id="total">$0.00</span></div>
+    </div>
+
+    <button class="submit-btn" onclick="submitOrder()">Submit Order</button>
+
+    <script>
+        function calculateTotal() {
+            // Calculation logic for total cost
+        }
+
+        function submitOrder() {
+            const orderSummary = generateOrderSummary();
+            const customerName = document.getElementById("customer-name").value;
+            const comments = document.getElementById("comments").value;
+
+            // Data to send to Google Sheets
+            const data = {
+                customerName: customerName,
+                orderSummary: orderSummary,
+                comments: comments,
+            };
+
+            // Submit data to Google Sheet
+            fetch('https://script.google.com/macros/s/AKfycbwTlIqENeumogb0NA6xDNyEHD7QWt0T1BbcxfXj7pQWT02XfTyOxdQtOcYCPS7gspWy0g/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => {
+                alert('Order submitted successfully!');
+                clearForm();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function generateOrderSummary() {
+            // Function to generate the order summary
+            let summary = "";
+            // Add logic to capture selected rolls, nigiri, crispy rice, sashimi, etc.
+            return summary;
+        }
+
+        function clearForm() {
+            // Function to reset the form after submission
+            document.getElementById("customer-name").value = "";
+            document.getElementById("comments").value = "";
+            // Reset other form fields if needed
+        }
+    </script>
+
+</body>
+</html>
