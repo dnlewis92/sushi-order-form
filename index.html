@@ -161,60 +161,25 @@
     <button class="submit-btn" id="submit-btn">Submit Order</button>
 
     <script>
-        // Script to calculate total price
-        const rollPrices = {
-            roll1: 8.00,
-            roll2: 9.00,
-            roll3: 9.00,
-            roll4: 9.00,
-            roll5: 9.00,
-            roll6: 9.00,
-            roll7: 9.00,
-            roll8: 6.00,
-            roll9: 14.00,
-            roll10: 14.00,
-            roll11: 14.00,
-            roll12: 20.00
-        };
-        
-        const crispyRicePrices = {
-            crispy1: 12.00,
-            crispy2: 12.00
-        };
-
-        const nigiriPrices = {
-            'nigiri-salmon': 10.00,
-            'nigiri-bluefin': 14.00,
-            'nigiri-otoro': 20.00
-        };
-
-        const sashimiPrices = {
-            'sashimi-salmon': 12.00,
-            'sashimi-tuna': 16.00,
-            'sashimi-otoro': 20.00
+        const prices = {
+            roll1: 8.00, roll2: 9.00, roll3: 9.00, roll4: 9.00, roll5: 9.00,
+            roll6: 9.00, roll7: 9.00, roll8: 6.00, roll9: 14.00, roll10: 14.00,
+            roll11: 14.00, roll12: 20.00, 'nigiri-salmon': 10.00, 'nigiri-bluefin': 14.00,
+            'nigiri-otoro': 20.00, crispy1: 12.00, crispy2: 12.00, 'sashimi-salmon': 12.00,
+            'sashimi-tuna': 16.00, 'sashimi-otoro': 20.00
         };
 
         document.getElementById('submit-btn').addEventListener('click', () => {
             let total = 0;
             let summary = "";
 
-            for (let rollId in rollPrices) {
-                let qty = document.getElementById(`${rollId}-qty`).value;
-                if (qty > 0) {
-                    total += qty * rollPrices[rollId];
-                    summary += `${rollId.replace('roll', 'Roll ')}: ${qty}x - $${(qty * rollPrices[rollId]).toFixed(2)}<br>`;
+            for (let id in prices) {
+                let quantity = document.getElementById(id + '-qty') ? document.getElementById(id + '-qty').value : 0;
+                if (quantity > 0) {
+                    total += quantity * prices[id];
+                    summary += `${id.replace(/roll|nigiri|sashimi|crispy/, '')}: ${quantity}x - $${(quantity * prices[id]).toFixed(2)}<br>`;
                 }
             }
-
-            for (let itemId in crispyRicePrices) {
-                let qty = document.getElementById(`${itemId}-qty`).value;
-                if (qty > 0) {
-                    total += qty * crispyRicePrices[itemId];
-                    summary += `${itemId.replace('crispy', 'Crispy Rice ')}: ${qty}x - $${(qty * crispyRicePrices[itemId]).toFixed(2)}<br>`;
-                }
-            }
-
-            // Calculate other sections like nigiri, sashimi similarly...
 
             document.getElementById('summary-details').innerHTML = summary;
             document.getElementById('total-amount').innerText = `Total: $${total.toFixed(2)}`;
