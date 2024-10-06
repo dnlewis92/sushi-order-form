@@ -134,104 +134,92 @@
 
     <!-- Sashimi Section -->
     <div class="roll-section">
-        <div class="section-title">Sashimi, 5 pieces per order</div>
+        <div class="section-title">Sashimi, 4 pieces per order</div>
         <div class="checkbox-item">
             <input type="checkbox" id="sashimi-salmon" name="sashimi" value="Salmon"> Salmon ($12.00)<br>
-            <input type="checkbox" id="sashimi-bluefin" name="sashimi" value="Bluefin Tuna"> Bluefin Tuna ($16.00)<br>
-            <input type="checkbox" id="sashimi-otoro" name="sashimi" value="Otoro Tuna"> Otoro Tuna ($22.00)<br>
+            <input type="checkbox" id="sashimi-tuna" name="sashimi" value="Tuna"> Tuna ($16.00)<br>
+            <input type="checkbox" id="sashimi-otoro" name="sashimi" value="Otoro Tuna"> Otoro Tuna ($20.00)<br>
             Quantity: <input type="number" class="input-box" id="sashimi-qty" value="0" min="0">
         </div>
     </div>
 
+    <!-- Order Summary Section -->
+    <div class="order-summary" id="order-summary">
+        <div class="section-title">Order Summary</div>
+        <!-- This section will display the summary of the customer's selections -->
+        <div id="summary-details"></div>
+        <div class="total" id="total-amount"></div>
+    </div>
+
     <!-- Comment Section -->
-    <div>
-        <label for="comment">Additional Comments:</label>
-        <textarea id="comment" rows="4" cols="50" placeholder="Leave extra notes or customization requests"></textarea>
+    <div class="roll-section">
+        <label for="comments">Additional Comments:</label><br>
+        <textarea id="comments" rows="4" cols="50" placeholder="Add any special requests or dietary restrictions..."></textarea>
     </div>
 
-    <div class="order-summary">
-        <div class="section-title">Order Summary:</div>
-        <pre id="summary"></pre>
-        <div class="total">Total: $<span id="total-cost">0.00</span></div>
-    </div>
-
-    <button class="submit-btn" onclick="submitOrder()">Submit Order</button>
+    <!-- Submit Button -->
+    <button class="submit-btn" id="submit-btn">Submit Order</button>
 
     <script>
-        function submitOrder() {
-            // Order Summary Logic
-            var summary = "";
-            var totalCost = 0;
-            var customerName = document.getElementById("customer-name").value;
-            
-            summary += "Customer Name: " + customerName + "\n\n";
-            
-            var rolls = [
-                { id: "roll1", name: "Valley Girl", price: 8.00 },
-                { id: "roll2", name: "Jersey Boy", price: 9.00 },
-                { id: "roll3", name: "The Grove", price: 9.00 },
-                { id: "roll4", name: "Japanese Garden", price: 9.00 },
-                { id: "roll5", name: "Rocky Roll", price: 9.00 },
-                { id: "roll6", name: "Gotham Chi Roll", price: 9.00 },
-                { id: "roll7", name: "President Roll", price: 9.00 },
-                { id: "roll8", name: "Torah Chair Roll", price: 6.00 },
-                { id: "roll9", name: "The Wife Roll", price: 14.00 },
-                { id: "roll10", name: "The Husband Roll", price: 14.00 },
-                { id: "roll11", name: "The 6th Year Roll", price: 14.00 },
-                { id: "roll12", name: "The ChaChing", price: 20.00 }
-            ];
+        // Script to calculate total price
+        const rollPrices = {
+            roll1: 8.00,
+            roll2: 9.00,
+            roll3: 9.00,
+            roll4: 9.00,
+            roll5: 9.00,
+            roll6: 9.00,
+            roll7: 9.00,
+            roll8: 6.00,
+            roll9: 14.00,
+            roll10: 14.00,
+            roll11: 14.00,
+            roll12: 20.00
+        };
+        
+        const crispyRicePrices = {
+            crispy1: 12.00,
+            crispy2: 12.00
+        };
 
-            rolls.forEach(function (roll) {
-                var qty = parseInt(document.getElementById(roll.id + "-qty").value);
+        const nigiriPrices = {
+            'nigiri-salmon': 10.00,
+            'nigiri-bluefin': 14.00,
+            'nigiri-otoro': 20.00
+        };
+
+        const sashimiPrices = {
+            'sashimi-salmon': 12.00,
+            'sashimi-tuna': 16.00,
+            'sashimi-otoro': 20.00
+        };
+
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            let total = 0;
+            let summary = "";
+
+            for (let rollId in rollPrices) {
+                let qty = document.getElementById(`${rollId}-qty`).value;
                 if (qty > 0) {
-                    summary += roll.name + " x" + qty + " - $" + (roll.price * qty).toFixed(2) + "\n";
-                    totalCost += roll.price * qty;
+                    total += qty * rollPrices[rollId];
+                    summary += `${rollId.replace('roll', 'Roll ')}: ${qty}x - $${(qty * rollPrices[rollId]).toFixed(2)}<br>`;
                 }
-            });
-
-            // Crispy Rice
-            var crispyOptions = [
-                { id: "crispy1", name: "Spicy Tuna Crispy Rice", price: 12.00 },
-                { id: "crispy2", name: "Spicy Salmon Crispy Rice", price: 12.00 }
-            ];
-
-            crispyOptions.forEach(function (option) {
-                if (document.getElementById(option.id).checked) {
-                    var qty = parseInt(document.getElementById("crispy-qty").value);
-                    if (qty > 0) {
-                        summary += option.name + " x" + qty + " - $" + (option.price * qty).toFixed(2) + "\n";
-                        totalCost += option.price * qty;
-                    }
-                }
-            });
-
-            // Sashimi
-            var sashimiOptions = [
-                { id: "sashimi-salmon", name: "Salmon Sashimi", price: 12.00 },
-                { id: "sashimi-bluefin", name: "Bluefin Tuna Sashimi", price: 16.00 },
-                { id: "sashimi-otoro", name: "Otoro Tuna Sashimi", price: 22.00 }
-            ];
-
-            sashimiOptions.forEach(function (option) {
-                if (document.getElementById(option.id).checked) {
-                    var qty = parseInt(document.getElementById("sashimi-qty").value);
-                    if (qty > 0) {
-                        summary += option.name + " x" + qty + " - $" + (option.price * qty).toFixed(2) + "\n";
-                        totalCost += option.price * qty;
-                    }
-                }
-            });
-
-            // Additional comments
-            var comment = document.getElementById("comment").value;
-            if (comment) {
-                summary += "\nComments: " + comment + "\n";
             }
 
-            // Update Summary and Total Cost
-            document.getElementById("summary").textContent = summary;
-            document.getElementById("total-cost").textContent = totalCost.toFixed(2);
-        }
+            for (let itemId in crispyRicePrices) {
+                let qty = document.getElementById(`${itemId}-qty`).value;
+                if (qty > 0) {
+                    total += qty * crispyRicePrices[itemId];
+                    summary += `${itemId.replace('crispy', 'Crispy Rice ')}: ${qty}x - $${(qty * crispyRicePrices[itemId]).toFixed(2)}<br>`;
+                }
+            }
+
+            // Calculate other sections like nigiri, sashimi similarly...
+
+            document.getElementById('summary-details').innerHTML = summary;
+            document.getElementById('total-amount').innerText = `Total: $${total.toFixed(2)}`;
+        });
     </script>
+
 </body>
 </html>
