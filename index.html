@@ -147,10 +147,53 @@
                 }
             });
 
-            const crispyRice = document.getElementById('crispy-qty').value;
-            if (crispyRice > 0) {
-                summary.innerHTML += `Crispy Rice: ${crispyRice} x $12.00<br>`;
-                total += 12 * crispyRice;
+            // Crispy Rice Section
+            const crispyQty = parseInt(document.getElementById('crispy-qty').value) || 0;
+            if (crispyQty > 0) {
+                summary.innerHTML += `Crispy Rice: ${crispyQty} x $12.00 = $${(12 * crispyQty).toFixed(2)}<br>`;
+                total += 12 * crispyQty;
+            }
+
+            // Nigiri Section
+            const nigiriSalmonQty = parseInt(document.getElementById('nigiri-salmon').value) || 0;
+            const nigiriBluefinQty = parseInt(document.getElementById('nigiri-bluefin').value) || 0;
+            const nigiriOtoroQty = parseInt(document.getElementById('nigiri-otoro').value) || 0;
+
+            if (nigiriSalmonQty > 0) {
+                const nigiriSalmonTotal = 10 * nigiriSalmonQty;
+                total += nigiriSalmonTotal;
+                summary.innerHTML += `Salmon Nigiri: ${nigiriSalmonQty} x $10.00 = $${nigiriSalmonTotal.toFixed(2)}<br>`;
+            }
+            if (nigiriBluefinQty > 0) {
+                const nigiriBluefinTotal = 14 * nigiriBluefinQty;
+                total += nigiriBluefinTotal;
+                summary.innerHTML += `Bluefin Tuna Nigiri: ${nigiriBluefinQty} x $14.00 = $${nigiriBluefinTotal.toFixed(2)}<br>`;
+            }
+            if (nigiriOtoroQty > 0) {
+                const nigiriOtoroTotal = 20 * nigiriOtoroQty;
+                total += nigiriOtoroTotal;
+                summary.innerHTML += `Otoro Tuna Nigiri: ${nigiriOtoroQty} x $20.00 = $${nigiriOtoroTotal.toFixed(2)}<br>`;
+            }
+
+            // Sashimi Section
+            const sashimiSalmonQty = parseInt(document.getElementById('sashimi-salmon').value) || 0;
+            const sashimiTunaQty = parseInt(document.getElementById('sashimi-tuna').value) || 0;
+            const sashimiOtoroQty = parseInt(document.getElementById('sashimi-otoro').value) || 0;
+
+            if (sashimiSalmonQty > 0) {
+                const sashimiSalmonTotal = 12 * sashimiSalmonQty;
+                total += sashimiSalmonTotal;
+                summary.innerHTML += `Salmon Sashimi: ${sashimiSalmonQty} x $12.00 = $${sashimiSalmonTotal.toFixed(2)}<br>`;
+            }
+            if (sashimiTunaQty > 0) {
+                const sashimiTunaTotal = 16 * sashimiTunaQty;
+                total += sashimiTunaTotal;
+                summary.innerHTML += `Tuna Sashimi: ${sashimiTunaQty} x $16.00 = $${sashimiTunaTotal.toFixed(2)}<br>`;
+            }
+            if (sashimiOtoroQty > 0) {
+                const sashimiOtoroTotal = 20 * sashimiOtoroQty;
+                total += sashimiOtoroTotal;
+                summary.innerHTML += `Otoro Tuna Sashimi: ${sashimiOtoroQty} x $20.00 = $${sashimiOtoroTotal.toFixed(2)}<br>`;
             }
 
             totalAmount.innerHTML = `Total: $${total.toFixed(2)}`;
