@@ -62,9 +62,9 @@
             <input type="checkbox" id="nigiri-otoro" name="nigiri" value="Otoro Tuna"> Otoro Tuna ($20.00)<br>
             Quantity: <input type="number" class="input-box" id="nigiri-qty" value="0" min="0">
         </div>
-        <!-- Dummy Checkboxes for Nigiri -->
+        <!-- Dummy Checkbox for Nigiri -->
         <div class="checkbox-item">
-            <input type="checkbox" id="nigiri-dummy1" name="nigiri" value="Torched"> Dummy Nigiri 1 ($0.00)<br>
+            <input type="checkbox" id="nigiri-torched" name="nigiri" value="Torched"> Torched ($0.00)<br>
         </div>
     </div>
 
@@ -76,10 +76,10 @@
             <input type="checkbox" id="crispy2" name="crispy" value="Spicy Salmon Crispy Rice"> Spicy Salmon Crispy Rice ($12.00)<br>
             Quantity: <input type="number" class="input-box" id="crispy-qty" value="0" min="0">
         </div>
-        <!-- Options -->
+        <!-- Dummy Checkboxes for Crispy Rice -->
         <div class="checkbox-item">
-            <input type="checkbox" id="crispy-dummy1" name="crispy" value="Avocado"> Dummy Crispy Rice 1 ($0.00)<br>
-            <input type="checkbox" id="crispy-dummy2" name="crispy" value="Jalepeno"> Dummy Crispy Rice 2 ($0.00)<br>
+            <input type="checkbox" id="crispy-avocado" name="crispy" value="Avocado"> Avocado ($0.00)<br>
+            <input type="checkbox" id="crispy-jalapeno" name="crispy" value="Jalapeño"> Jalapeño ($0.00)<br>
         </div>
     </div>
 
@@ -108,9 +108,6 @@
         <textarea id="comments" rows="4" cols="50" placeholder="Add any special requests or dietary restrictions..."></textarea>
     </div>
 
-    <!-- Submit Button -->
-    <button class="submit-btn" id="submit-btn">Submit Order</button>
-
     <script>
         const menuItems = [
             { id: 'roll1', name: 'Valley Girl', description: 'California Roll', price: 8.00 },
@@ -136,7 +133,7 @@
                     <div class="roll-item" id="${item.id}">
                         <span class="roll-title">${item.name}</span> - <span class="roll-subtext">${item.description}</span>
                         <br>Price: <span class="price">$${item.price.toFixed(2)}</span>
-                        <br>Quantity: <input type="number" class="input-box" id="${item.id}-qty" value="0" min="0">
+                        <br>Quantity: <input type="number" id="${item.id}-qty" class="input-box" value="0" min="0">
                     </div>
                 `;
                 if (item.price <= 9.00) {
@@ -152,6 +149,10 @@
         function calculateTotal() {
             let total = 0;
             let summaryText = '';
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const quantities = document.querySelectorAll('input[type="number"]');
+
+            // Loop through menu items
             menuItems.forEach(item => {
                 const quantity = parseInt(document.getElementById(`${item.id}-qty`).value, 10);
                 if (quantity > 0) {
@@ -160,15 +161,24 @@
                 }
             });
 
-            // Display the total
+            // Loop through checkboxes
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    summaryText += `${checkbox.value}<br>`;
+                }
+            });
+
+            // Update the total and summary
             document.getElementById('total-amount').innerHTML = 'Total: $' + total.toFixed(2);
             document.getElementById('summary-details').innerHTML = summaryText;
         }
 
-        document.getElementById('submit-btn').addEventListener('click', () => {
-            calculateTotal();
-            // Here you can add functionality to send the order to Google Sheets
+        // Attach listeners to update order summary on any change
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('change', calculateTotal);
         });
+
     </script>
+
 </body>
 </html>
