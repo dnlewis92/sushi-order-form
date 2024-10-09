@@ -26,6 +26,12 @@
 
     <h1>Cookin' With The Lewises Order Form</h1>
 
+    <!-- Textbox for instructions -->
+    <div>
+        <label for="instructions">Special Instructions:</label><br>
+        <textarea id="instructions" rows="4" cols="50" placeholder="Add any special instructions here..."></textarea>
+    </div>
+
     <div>
         <label for="customer-name">Your Name:</label>
         <input type="text" id="customer-name" placeholder="Enter your name">
@@ -33,35 +39,30 @@
 
     <div class="form-container">
         <div class="roll-section column">
-            <div class="section-title">Basic Rolls</div>
+            <div class="section-title">Basic Rolls (8 Pieces)</div>
         </div>
 
         <div class="roll-section column">
-            <div class="section-title">Fancy Rolls</div>
+            <div class="section-title">Fancy Rolls (8 Pieces)</div>
         </div>
     </div>
 
     <div class="roll-section">
         <div class="section-title">Nigiri, 4 pieces per order</div>
         <div class="checkbox-item">
-            <label for="nigiri-salmon">Salmon Nigiri ($10.00):</label>
-            <input type="number" class="input-box" id="nigiri-salmon" value="0" min="0">
-            <br>
-            <label for="nigiri-bluefin">Bluefin Tuna Nigiri ($14.00):</label>
-            <input type="number" class="input-box" id="nigiri-bluefin" value="0" min="0">
-            <br>
-            <label for="nigiri-otoro">Otoro Tuna Nigiri ($20.00):</label>
-            <input type="number" class="input-box" id="nigiri-otoro" value="0" min="0">
-            <br>
-            <input type="checkbox" id="nigiri-torched" name="nigiri-addon" value="Torched"> Torched (add-on)
+            <input type="checkbox" id="nigiri-salmon" name="nigiri" value="Salmon"> Salmon (<span class="price">$10.00</span>)<br>
+            <input type="checkbox" id="nigiri-bluefin" name="nigiri" value="Bluefin Tuna"> Bluefin Tuna (<span class="price">$14.00</span>)<br>
+            <input type="checkbox" id="nigiri-otoro" name="nigiri" value="Otoro Tuna"> Otoro Tuna (<span class="price">$20.00</span>)<br>
+            <input type="checkbox" id="nigiri-torched" name="nigiri" value="Torched"> Torched (add-on)<br>
+            Quantity: <input type="number" class="input-box" id="nigiri-qty" value="0" min="0">
         </div>
     </div>
 
     <div class="roll-section">
         <div class="section-title">Crispy Rice Options</div>
         <div class="checkbox-item">
-            <input type="checkbox" id="crispy-salmon" name="crispy" value="Spicy Salmon Crispy Rice"> Spicy Salmon Crispy Rice ($12.00)<br>
-            <input type="checkbox" id="crispy-tuna" name="crispy" value="Spicy Tuna Crispy Rice"> Spicy Tuna Crispy Rice ($12.00)<br>
+            <input type="checkbox" id="crispy-salmon" name="crispy" value="Spicy Salmon Crispy Rice"> Spicy Salmon Crispy Rice (<span class="price">$12.00</span>)<br>
+            <input type="checkbox" id="crispy-tuna" name="crispy" value="Spicy Tuna Crispy Rice"> Spicy Tuna Crispy Rice (<span class="price">$12.00</span>)<br>
             Add-ons:<br>
             <input type="checkbox" id="crispy-avocado" name="crispy-addon" value="Avocado"> Avocado (add-on)<br>
             <input type="checkbox" id="crispy-jalapeno" name="crispy-addon" value="Jalapeño"> Jalapeño (add-on)<br>
@@ -72,14 +73,10 @@
     <div class="roll-section">
         <div class="section-title">Sashimi, 4 pieces per order</div>
         <div class="checkbox-item">
-            <label for="sashimi-salmon">Salmon Sashimi ($12.00):</label>
-            <input type="number" class="input-box" id="sashimi-salmon" value="0" min="0">
-            <br>
-            <label for="sashimi-tuna">Tuna Sashimi ($16.00):</label>
-            <input type="number" class="input-box" id="sashimi-tuna" value="0" min="0">
-            <br>
-            <label for="sashimi-otoro">Otoro Tuna Sashimi ($20.00):</label>
-            <input type="number" class="input-box" id="sashimi-otoro" value="0" min="0">
+            <input type="checkbox" id="sashimi-salmon" name="sashimi" value="Salmon"> Salmon (<span class="price">$12.00</span>)<br>
+            <input type="checkbox" id="sashimi-tuna" name="sashimi" value="Tuna"> Tuna (<span class="price">$16.00</span>)<br>
+            <input type="checkbox" id="sashimi-otoro" name="sashimi" value="Otoro Tuna"> Otoro Tuna (<span class="price">$20.00</span>)<br>
+            Quantity: <input type="number" class="input-box" id="sashimi-qty" value="0" min="0">
         </div>
     </div>
 
@@ -98,19 +95,23 @@
 
     <script>
         const menuItems = [
+            { id: 'roll8', name: 'Torah Chair Roll', description: 'Vegetable Roll (Avocado, Cucumber)', price: 6.50 },
             { id: 'roll1', name: 'Valley Girl', description: 'California Roll', price: 8.00 },
             { id: 'roll2', name: 'Jersey Boy', description: 'Salmon Avocado', price: 9.00 },
-            { id: 'roll3', name: 'The Grove', description: 'Salmon, Avocado, Cucumber', price: 9.00 },
-            { id: 'roll4', name: 'Rocky Roll', description: 'Spicy Salmon, Avocado', price: 9.00 },
-            { id: 'roll5', name: 'Married People Roll', description: 'Spicy Tuna, Avocado', price: 9.00 },
-            { id: 'roll6', name: '1171 E. 61st', description: 'Tuna, Avocado', price: 9.00 },
-            { id: 'roll7', name: 'President Roll', description: 'Vegetable Roll (Avocado, Cucumber)', price: 6.00 },
-            { id: 'roll8', name: 'Torah Chair Roll', description: 'Otoro Tuna with Avocado', price: 22.00 },
-            { id: 'roll9', name: 'The Wife Roll', description: 'California Roll Topped with Spicy Salmon and Crispy Onions', price: 14.00 },
-            { id: 'roll10', name: 'The Husband Roll', description: 'Salmon Avocado Topped with Spicy Salmon', price: 14.00 },
+            { id: 'roll6', name: '1171 E. 61st', description: 'Salmon, Avocado, Cucumber', price: 9.00 },
+            { id: 'roll3', name: 'The Grove', description: 'Tuna Avocado', price: 11.00 },
+            { id: 'roll7', name: 'President Roll', description: 'Tuna, Avocado, Cucumber', price: 11.00 },
+            { id: 'roll5', name: 'Married People Roll', description: 'Spicy Tuna, Avocado', price: 11.50 },
+            { id: 'roll4', name: 'Rocky Roll', description: 'Spicy Salmon, Avocado', price: 9.50 },
+            { id: 'roll9', name: 'The Wife Role', description: 'California Roll Topped with Spicy Salmon and Crispy Onions', price: 13.50 },
+            { id: 'roll10', name: 'The Husband Role', description: 'Salmon Avocado Topped with Spicy Salmon', price: 14.00 },
             { id: 'roll11', name: 'The 6th Year Roll', description: 'Spicy Salmon Avocado Topped with Avocado', price: 14.00 },
-            { id: 'roll12', name: 'The ChaChing', description: 'Salmon Avocado Topped with Torched Otoro Tuna', price: 22.00 }
+            { id: 'roll12', name: 'The Spicy One', description: 'Spicy Tuna Topped with Spicy Salmon and Crispy Onions', price: 16.00 },
+            { id: 'roll13', name: 'The ChaChing', description: 'Salmon Avocado Topped with Torched Otoro Tuna', price: 21.00 }
         ];
+
+        // Sort items by price (ascending)
+        menuItems.sort((a, b) => a.price - b.price);
 
         function renderMenuItems() {
             const basicRollsContainer = document.querySelector('.roll-section.column:nth-child(1)');
@@ -121,85 +122,17 @@
                     <div class="roll-item" id="${item.id}">
                         <span class="roll-title">${item.name}</span> - <span class="roll-subtext">${item.description}</span>
                         <br>Price: <span class="price">$${item.price.toFixed(2)}</span>
-                        <br>Quantity: <input type="number" class="input-box" id="${item.id}-qty" value="0" min="0">
+                        <br>Quantity: <input type="number" class="input-box" id="qty-${item.id}" value="0" min="0">
                     </div>
                 `;
-                if (item.price <= 9.00) {
+
+                if (item.price <= 12.00) {
                     basicRollsContainer.innerHTML += rollHTML;
                 } else {
                     fancyRollsContainer.innerHTML += rollHTML;
                 }
             });
         }
-
-        function updateSummary() {
-            const summary = document.getElementById('summary-details');
-            const totalAmount = document.getElementById('total-amount');
-            summary.innerHTML = '';
-            let total = 0;
-
-            menuItems.forEach(item => {
-                const quantity = parseInt(document.getElementById(`${item.id}-qty`).value) || 0;
-                if (quantity > 0) {
-                    const itemTotal = item.price * quantity;
-                    total += itemTotal;
-                    summary.innerHTML += `${item.name}: ${quantity} x $${item.price.toFixed(2)} = $${itemTotal.toFixed(2)}<br>`;
-                }
-            });
-
-            // Crispy Rice Section
-            const crispyQty = parseInt(document.getElementById('crispy-qty').value) || 0;
-            if (crispyQty > 0) {
-                summary.innerHTML += `Crispy Rice: ${crispyQty} x $12.00 = $${(12 * crispyQty).toFixed(2)}<br>`;
-                total += 12 * crispyQty;
-            }
-
-            // Nigiri Section
-            const nigiriSalmonQty = parseInt(document.getElementById('nigiri-salmon').value) || 0;
-            const nigiriBluefinQty = parseInt(document.getElementById('nigiri-bluefin').value) || 0;
-            const nigiriOtoroQty = parseInt(document.getElementById('nigiri-otoro').value) || 0;
-
-            if (nigiriSalmonQty > 0) {
-                const nigiriSalmonTotal = 10 * nigiriSalmonQty;
-                total += nigiriSalmonTotal;
-                summary.innerHTML += `Salmon Nigiri: ${nigiriSalmonQty} x $10.00 = $${nigiriSalmonTotal.toFixed(2)}<br>`;
-            }
-            if (nigiriBluefinQty > 0) {
-                const nigiriBluefinTotal = 14 * nigiriBluefinQty;
-                total += nigiriBluefinTotal;
-                summary.innerHTML += `Bluefin Tuna Nigiri: ${nigiriBluefinQty} x $14.00 = $${nigiriBluefinTotal.toFixed(2)}<br>`;
-            }
-            if (nigiriOtoroQty > 0) {
-                const nigiriOtoroTotal = 20 * nigiriOtoroQty;
-                total += nigiriOtoroTotal;
-                summary.innerHTML += `Otoro Tuna Nigiri: ${nigiriOtoroQty} x $20.00 = $${nigiriOtoroTotal.toFixed(2)}<br>`;
-            }
-
-            // Sashimi Section
-            const sashimiSalmonQty = parseInt(document.getElementById('sashimi-salmon').value) || 0;
-            const sashimiTunaQty = parseInt(document.getElementById('sashimi-tuna').value) || 0;
-            const sashimiOtoroQty = parseInt(document.getElementById('sashimi-otoro').value) || 0;
-
-            if (sashimiSalmonQty > 0) {
-                const sashimiSalmonTotal = 12 * sashimiSalmonQty;
-                total += sashimiSalmonTotal;
-                summary.innerHTML += `Salmon Sashimi: ${sashimiSalmonQty} x $12.00 = $${sashimiSalmonTotal.toFixed(2)}<br>`;
-            }
-            if (sashimiTunaQty > 0) {
-                const sashimiTunaTotal = 16 * sashimiTunaQty;
-                total += sashimiTunaTotal;
-                summary.innerHTML += `Tuna Sashimi: ${sashimiTunaQty} x $16.00 = $${sashimiTunaTotal.toFixed(2)}<br>`;
-            }
-            if (sashimiOtoroQty > 0) {
-                const sashimiOtoroTotal = 20 * sashimiOtoroQty;
-                total += sashimiOtoroTotal;
-                summary.innerHTML += `Otoro Tuna Sashimi: ${sashimiOtoroQty} x $20.00 = $${sashimiOtoroTotal.toFixed(2)}<br>`;
-            }
-
-            totalAmount.innerHTML = `Total: $${total.toFixed(2)}`;
-        }
-
-        document.getElementById('submit-btn').addEventListener('click', updateSummary);
 
         renderMenuItems();
     </script>
