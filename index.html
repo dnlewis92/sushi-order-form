@@ -12,7 +12,7 @@
         .roll-item { margin-bottom: 10px; }
         .roll-title { font-weight: bold; }
         .roll-subtext { font-style: italic; color: gray; }
-        .price { color: green; font-weight: bold; }
+        .price { color: green; font-weight: bold; } /* Set prices to green */
         .order-summary { margin-top: 30px; padding: 10px; border: 1px solid #ccc; background-color: #fff; }
         .total { font-weight: bold; font-size: 1.2em; margin-top: 20px; }
         .submit-btn { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; }
@@ -44,9 +44,9 @@
     <div class="roll-section">
         <div class="section-title">Nigiri, 4 pieces per order</div>
         <div class="checkbox-item">
-            <input type="checkbox" id="nigiri-salmon" name="nigiri" value="Salmon"> Salmon ($10.00)<br>
-            <input type="checkbox" id="nigiri-bluefin" name="nigiri" value="Bluefin Tuna"> Bluefin Tuna ($14.00)<br>
-            <input type="checkbox" id="nigiri-otoro" name="nigiri" value="Otoro Tuna"> Otoro Tuna ($20.00)<br>
+            <input type="checkbox" id="nigiri-salmon" name="nigiri" value="Salmon"> Salmon (<span class="price">$10.00</span>)<br>
+            <input type="checkbox" id="nigiri-bluefin" name="nigiri" value="Bluefin Tuna"> Bluefin Tuna (<span class="price">$14.00</span>)<br>
+            <input type="checkbox" id="nigiri-otoro" name="nigiri" value="Otoro Tuna"> Otoro Tuna (<span class="price">$20.00</span>)<br>
             <input type="checkbox" id="nigiri-torched" name="nigiri" value="Torched"> Torched<br>
             Quantity: <input type="number" class="input-box" id="nigiri-qty" value="0" min="0">
         </div>
@@ -55,8 +55,8 @@
     <div class="roll-section">
         <div class="section-title">Crispy Rice</div>
         <div class="checkbox-item">
-            <input type="checkbox" id="crispy-salmon" name="crispy" value="Spicy Salmon Crispy Rice"> Spicy Salmon Crispy Rice ($12.00)<br>
-            <input type="checkbox" id="crispy-tuna" name="crispy" value="Spicy Tuna Crispy Rice"> Spicy Tuna Crispy Rice ($12.00)<br>
+            <input type="checkbox" id="crispy-salmon" name="crispy" value="Spicy Salmon Crispy Rice"> Spicy Salmon Crispy Rice (<span class="price">$12.00</span>)<br>
+            <input type="checkbox" id="crispy-tuna" name="crispy" value="Spicy Tuna Crispy Rice"> Spicy Tuna Crispy Rice (<span class="price">$12.00</span>)<br>
             Add-ons:<br>
             <input type="checkbox" id="crispy-avocado" name="crispy-addon" value="Avocado"> Avocado<br>
             <input type="checkbox" id="crispy-jalapeno" name="crispy-addon" value="Jalapeño"> Jalapeño<br>
@@ -67,9 +67,9 @@
     <div class="roll-section">
         <div class="section-title">Sashimi, 4 pieces per order</div>
         <div class="checkbox-item">
-            <input type="checkbox" id="sashimi-salmon" name="sashimi" value="Salmon"> Salmon ($12.00)<br>
-            <input type="checkbox" id="sashimi-tuna" name="sashimi" value="Tuna"> Tuna ($16.00)<br>
-            <input type="checkbox" id="sashimi-otoro" name="sashimi" value="Otoro Tuna"> Otoro Tuna ($20.00)<br>
+            <input type="checkbox" id="sashimi-salmon" name="sashimi" value="Salmon"> Salmon (<span class="price">$12.00</span>)<br>
+            <input type="checkbox" id="sashimi-tuna" name="sashimi" value="Tuna"> Tuna (<span class="price">$16.00</span>)<br>
+            <input type="checkbox" id="sashimi-otoro" name="sashimi" value="Otoro Tuna"> Otoro Tuna (<span class="price">$20.00</span>)<br>
             Quantity: <input type="number" class="input-box" id="sashimi-qty" value="0" min="0">
         </div>
     </div>
@@ -137,27 +137,28 @@
 
             const nigiriQty = document.getElementById('nigiri-qty').value;
             if (nigiriQty > 0) {
-                const nigiriTotal = 10 * nigiriQty;
-                summaryHTML += `${nigiriQty} x Nigiri - $${nigiriTotal.toFixed(2)}<br>`;
-                total += nigiriTotal;
+                summaryHTML += `${nigiriQty} x Nigiri - $${(10 * nigiriQty).toFixed(2)}<br>`;
+                total += 10 * nigiriQty;
             }
 
             const crispyQty = document.getElementById('crispy-qty').value;
             if (crispyQty > 0) {
-                const crispyTotal = 12 * crispyQty;
-                summaryHTML += `${crispyQty} x Crispy Rice - $${crispyTotal.toFixed(2)}<br>`;
-                total += crispyTotal;
+                summaryHTML += `${crispyQty} x Crispy Rice - $${(12 * crispyQty).toFixed(2)}<br>`;
+                total += 12 * crispyQty;
+            }
+
+            const sashimiQty = document.getElementById('sashimi-qty').value;
+            if (sashimiQty > 0) {
+                summaryHTML += `${sashimiQty} x Sashimi - $${(12 * sashimiQty).toFixed(2)}<br>`;
+                total += 12 * sashimiQty;
             }
 
             document.getElementById('summary-details').innerHTML = summaryHTML;
             document.getElementById('total-amount').innerHTML = `Total: $${total.toFixed(2)}`;
         }
 
-        document.addEventListener('input', updateSummary);
-
-        document.getElementById('submit-btn').addEventListener('click', function() {
-            alert('Order Submitted!');
-        });
+        document.addEventListener('change', updateSummary);
+        document.getElementById('submit-btn').addEventListener('click', () => alert('Order Submitted!'));
 
         renderMenuItems();
     </script>
