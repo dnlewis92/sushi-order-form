@@ -18,8 +18,8 @@
         .submit-btn { background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; }
         .input-box { width: 50px; }
         .checkbox-item { margin-bottom: 10px; }
-        .form-container { display: flex; flex-wrap: wrap; justify-content: space-between; }
-        .column { width: 48%; }
+        .form-container { display: flex; flex-wrap: wrap; }
+        .column { flex: 50%; padding: 10px; }
     </style>
 </head>
 <body>
@@ -47,15 +47,13 @@
             <input type="checkbox" id="nigiri-salmon" name="nigiri" value="Salmon"> Salmon ($10.00)<br>
             <input type="checkbox" id="nigiri-bluefin" name="nigiri" value="Bluefin Tuna"> Bluefin Tuna ($14.00)<br>
             <input type="checkbox" id="nigiri-otoro" name="nigiri" value="Otoro Tuna"> Otoro Tuna ($20.00)<br>
-            <input type="checkbox" id="nigiri-torched" name="nigiri-addon" value="Torched"> Torched<br>
-            <input type="checkbox" id="nigiri-avocado" name="nigiri-addon" value="Avocado"> Avocado<br>
-            <input type="checkbox" id="nigiri-jalapeno" name="nigiri-addon" value="Jalapeño"> Jalapeño<br>
+            <input type="checkbox" id="nigiri-torched" name="nigiri" value="Torched"> Torched<br>
             Quantity: <input type="number" class="input-box" id="nigiri-qty" value="0" min="0">
         </div>
     </div>
 
     <div class="roll-section">
-        <div class="section-title">Crispy Rice</div>
+        <div class="section-title">Crispy Rice, 6 pieces per order</div>
         <div class="checkbox-item">
             <input type="checkbox" id="crispy-salmon" name="crispy" value="Spicy Salmon Crispy Rice"> Spicy Salmon Crispy Rice ($12.00)<br>
             <input type="checkbox" id="crispy-tuna" name="crispy" value="Spicy Tuna Crispy Rice"> Spicy Tuna Crispy Rice ($12.00)<br>
@@ -129,7 +127,6 @@
             let summaryHTML = '';
             let total = 0;
 
-            // Process main menu items
             menuItems.forEach(item => {
                 const qty = document.getElementById(`${item.id}-qty`).value;
                 if (qty > 0) {
@@ -138,42 +135,96 @@
                 }
             });
 
-            // Process Nigiri
-            const nigiriQty = document.getElementById('nigiri-qty').value;
-            if (nigiriQty > 0) {
-                const nigiriSelected = [...document.querySelectorAll('input[name="nigiri"]:checked')].map(checkbox => checkbox.value).join(', ');
-                const nigiriAddons = [...document.querySelectorAll('input[name="nigiri-addon"]:checked')].map(checkbox => checkbox.value).join(', ');
-                summaryHTML += `${nigiriQty} x Nigiri (${nigiriSelected}) ${nigiriAddons ? 'with ' + nigiriAddons : ''} - $${(10 * nigiriQty).toFixed(2)}<br>`;
-                total += 10 * nigiriQty;
-            }
-
-            // Process Crispy Rice
+            // Crispy Rice section
+            const crispyRiceBase = [];
+            if (document.getElementById('crispy-salmon').checked) crispyRiceBase.push('Spicy Salmon');
+            if (document.getElementById('crispy-tuna').checked) crispyRiceBase.push('Spicy Tuna');
+            let crispyRiceAddons = [];
+            if (document.getElementById('crispy-avocado').checked) crispyRiceAddons.push('Avocado');
+            if (document.getElementById('crispy-jalapeno').checked) crispyRiceAddons.push('Jalapeño');
             const crispyQty = document.getElementById('crispy-qty').value;
-            if (crispyQty > 0) {
-                const crispySelected = [...document.querySelectorAll('input[name="crispy"]:checked')].map(checkbox => checkbox.value).join(', ');
-                const crispyAddons = [...document.querySelectorAll('input[name="crispy-addon"]:checked')].map(checkbox => checkbox.value).join(', ');
-                summaryHTML += `${crispyQty} x Crispy Rice (${crispySelected}) ${crispyAddons ? 'with ' + crispyAddons : ''} - $${(12 * crispyQty).toFixed(2)}<br>`;
+            if (crispyRiceBase.length > 0 && crispyQty > 0) {
+                summaryHTML += `${crispyQty} x Crispy Rice (${crispyRiceBase.join(', ')}) `;
+                if (crispyRiceAddons.length > 0) {
+                    summaryHTML += `with Add-ons: ${crispyRiceAddons.join(', ')} - $${(12 * crispyQty).toFixed(2)}<br>`;
+                } else {
+                    summaryHTML += `- $${(12 * crispyQty).toFixed(2)}<br>`;
+                }
                 total += 12 * crispyQty;
             }
 
-            // Process Sashimi
-            const sashimiQty = document.getElementById('sashimi-qty').value;
-            if (sashimiQty > 0) {
-                const sashimiSelected = [...document.querySelectorAll('input[name="sashimi"]:checked')].map(checkbox => checkbox.value).join(', ');
-                summaryHTML += `${sashimiQty} x Sashimi (${sashimiSelected}) - $${(12 * sashimiQty).toFixed(2)}<br>`;
-                total += 12 * sashimiQty;
+            // Nigiri section
+            let nigiriTotal = 0;
+            if (document.getElementById('nigiri-salmon').checked) {
+                const qty = document.getElementById('nigiri-qty').value;
+                if (qty > 0) {
+                    summaryHTML += `${qty} x Nigiri Salmon - $${(10 * qty).toFixed(2)}<br>`;
+                    nigiriTotal += 10 * qty;
+                }
             }
 
+            if (document.getElementById('nigiri-bluefin').checked) {
+                const qty = document.getElementById('nigiri-qty').value;
+                if (qty > 0) {
+                    summaryHTML += `${qty} x Nigiri Bluefin Tuna - $${(14 * qty).toFixed(2)}<br>`;
+                    nigiriTotal += 14 * qty;
+                }
+            }
+
+            if (document.getElementById('nigiri-otoro').checked) {
+                const qty = document.getElementById('nigiri-qty').value;
+                if (qty > 0) {
+                    summaryHTML += `${qty} x Nigiri Otoro Tuna - $${(20 * qty).toFixed(2)}<br>`;
+                    nigiriTotal += 20 * qty;
+                }
+            }
+
+            total += nigiriTotal;
+
+            // Sashimi section
+            let sashimiTotal = 0;
+            if (document.getElementById('sashimi-salmon').checked) {
+                const qty = document.getElementById('sashimi-qty').value;
+                if (qty > 0) {
+                    summaryHTML += `${qty} x Sashimi Salmon - $${(12 * qty).toFixed(2)}<br>`;
+                    sashimiTotal += 12 * qty;
+                }
+            }
+
+            if (document.getElementById('sashimi-tuna').checked) {
+                const qty = document.getElementById('sashimi-qty').value;
+                if (qty > 0) {
+                    summaryHTML += `${qty} x Sashimi Tuna - $${(16 * qty).toFixed(2)}<br>`;
+                    sashimiTotal += 16 * qty;
+                }
+            }
+
+            if (document.getElementById('sashimi-otoro').checked) {
+                const qty = document.getElementById('sashimi-qty').value;
+                if (qty > 0) {
+                    summaryHTML += `${qty} x Sashimi Otoro Tuna - $${(20 * qty).toFixed(2)}<br>`;
+                    sashimiTotal += 20 * qty;
+                }
+            }
+
+            total += sashimiTotal;
+
+            // Final order summary and total
             document.getElementById('summary-details').innerHTML = summaryHTML;
             document.getElementById('total-amount').innerHTML = `Total: $${total.toFixed(2)}`;
         }
 
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('change', updateSummary);
+        document.addEventListener('DOMContentLoaded', function () {
+            renderMenuItems();
+
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('change', updateSummary);
+            });
+
+            document.getElementById('submit-btn').addEventListener('click', function () {
+                alert('Order submitted!');
+            });
         });
-
-        renderMenuItems();
     </script>
-
 </body>
 </html>
