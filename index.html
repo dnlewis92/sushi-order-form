@@ -7,6 +7,7 @@
     <style>
         body { font-family: Arial, sans-serif; background-color: #f9f7e8; padding: 20px; }
         h1 { text-align: center; }
+        .instructions { background-color: #e8f0fe; border: 1px solid #c1d3e0; padding: 15px; margin-bottom: 20px; }
         .roll-section { margin-bottom: 20px; }
         .section-title { font-size: 1.5em; font-weight: bold; margin-bottom: 10px; }
         .roll-item { margin-bottom: 10px; }
@@ -25,6 +26,11 @@
 <body>
 
     <h1>Rollin' With The Lewises Order Form</h1>
+
+    <div class="instructions">
+        <h2>Instructions</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
 
     <div>
         <label for="customer-name">Your Name:</label>
@@ -127,6 +133,7 @@
             let summaryHTML = '';
             let total = 0;
 
+            // Basic Rolls section
             menuItems.forEach(item => {
                 const qty = document.getElementById(`${item.id}-qty`).value;
                 if (qty > 0) {
