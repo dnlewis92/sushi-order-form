@@ -28,7 +28,7 @@
     <h1>Rollin' With The Lewises Order Form</h1>
 
     <div class="instructions">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque efficitur velit in eros pharetra, sit amet bibendum ex fermentum. Ut quis dolor eget arcu fringilla varius a sit amet dolor. Cras vel scelerisque dolor.
+        Please fill out your order below. Don't forget to enter your name!
     </div>
 
     <div>
@@ -149,7 +149,7 @@
             // Handle Nigiri
             if (nigiriQty > 0) {
                 const selectedNigiri = Array.from(document.querySelectorAll('input[name="nigiri"]:checked')).map(input => {
-                    return input.value;
+                    return input.value + ' Nigiri';
                 }).join(', ');
                 const nigiriAddons = Array.from(document.querySelectorAll('input[name="nigiri-addon"]:checked')).map(input => input.value).join(', ');
                 const nigiriPrice = Array.from(document.querySelectorAll('input[name="nigiri"]:checked')).reduce((sum, input) => {
@@ -180,7 +180,7 @@
             // Handle Sashimi
             if (sashimiQty > 0) {
                 const selectedSashimi = Array.from(document.querySelectorAll('input[name="sashimi"]:checked')).map(input => {
-                    return input.value;
+                    return input.value + ' Sashimi';
                 }).join(', ');
                 const sashimiPrice = Array.from(document.querySelectorAll('input[name="sashimi"]:checked')).reduce((sum, input) => {
                     if (input.value === 'Salmon') return sum + (12.00 * sashimiQty);
@@ -226,7 +226,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                alert('Order submitted successfully!');
+                alert('Order submitted successfully!'); // Notification on successful submission
                 // Reset the form
                 document.getElementById('customer-name').value = '';
                 document.getElementById('comments').value = '';
@@ -234,7 +234,10 @@
                 document.getElementById('summary-details').innerHTML = '';
                 document.getElementById('total-amount').innerHTML = '';
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your order. Please try again.'); // Notify of error
+            });
         });
 
         document.addEventListener('input', updateSummary);
