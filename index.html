@@ -89,16 +89,16 @@
 
     <script>
         const menuItems = [
-            { id: 'roll1', name: 'Valley Girl', description: 'California Roll', price: 8.00 },
-            { id: 'roll2', name: 'Jersey Boy', description: 'Spicy Salmon, Avocado', price: 9.00 },
-            { id: 'roll3', name: 'Japanese Garden', description: 'Spicy Tuna, Cucumber, Avocado', price: 9.00 },
-            { id: 'roll4', name: 'The Grove', description: 'Spicy Salmon, Cucumber, Avocado', price: 9.00 },
-            { id: 'roll5', name: 'Rocky Roll', description: 'Salmon Avocado', price: 9.00 },
-            { id: 'roll6', name: '1171 E. 61st', description: 'Tuna, Avocado', price: 9.00 },
-            { id: 'roll7', name: 'President Roll', description: 'Spicy Tuna, Avocado', price: 9.00 },
-            { id: 'roll8', name: 'Torah Chair Roll', description: 'Vegetable Roll (Avocado, Cucumber)', price: 6.00 },
+            { id: 'roll1', name: 'Valley Girl', description: 'Vegetable Roll (Avocado, Cucumber)', price: 6.00 },
+            { id: 'roll2', name: 'Jersey Boy', description: 'California Roll', price: 8.00 },
+            { id: 'roll3', name: 'Japanese Garden', description: 'Salmon Avocado', price: 9.00 },
+            { id: 'roll4', name: 'The Grove', description: 'Salmon, Avocado, Cucumber', price: 9.00 },
+            { id: 'roll5', name: 'Rocky Roll', description: 'Spicy Salmon Avocado', price: 9.50 },
+            { id: 'roll6', name: '1171 E. 61st', description: 'Tuna, Avocado', price: 11.00 },
+            { id: 'roll7', name: 'President Roll', description: 'Tuna, Cucumber, Avocado', price: 11.00 },
+            { id: 'roll8', name: 'Torah Chair Roll', description: 'Spicy Tuna, Avocado', price: 11.50 },
             { id: 'roll9', name: 'The Wife Role', description: 'California Roll Topped with Spicy Salmon and Crispy Onions', price: 14.00 },
-            { id: 'roll10', name: 'The Husband Role', description: 'Salmon Avocado Topped with Spicy Salmon', price: 14.00 },
+            { id: 'roll10', name: 'The Husband Role', description: 'Salmon Avocado Topped with Spicy Salmon and Crispy Onions', price: 14.00 },
             { id: 'roll11', name: 'The 6th Year Roll', description: 'Spicy Salmon Avocado Topped with Avocado', price: 14.00 },
             { id: 'roll12', name: 'The ChaChing', description: 'Salmon Avocado Topped with Torched Otoro Tuna', price: 20.00 }
         ];
@@ -115,7 +115,7 @@
                         <br>Quantity: <input type="number" class="input-box" id="${item.id}-qty" value="0" min="0">
                     </div>
                 `;
-                if (item.price <= 9.00) {
+                if (item.price <= 12.00) {
                     basicRollsContainer.innerHTML += rollHTML;
                 } else {
                     fancyRollsContainer.innerHTML += rollHTML;
