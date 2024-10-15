@@ -149,36 +149,38 @@
             // Handle Nigiri
             if (nigiriQty > 0) {
                 const selectedNigiri = Array.from(document.querySelectorAll('input[name="nigiri"]:checked')).map(input => {
-                    return `${input.value} x ${nigiriQty}`;
+                    return input.value;
                 }).join(', ');
+                const nigiriAddons = Array.from(document.querySelectorAll('input[name="nigiri-addon"]:checked')).map(input => input.value).join(', ');
                 const nigiriPrice = Array.from(document.querySelectorAll('input[name="nigiri"]:checked')).reduce((sum, input) => {
                     if (input.value === 'Salmon') return sum + (10.00 * nigiriQty);
                     if (input.value === 'Bluefin Tuna') return sum + (14.00 * nigiriQty);
                     if (input.value === 'Otoro Tuna') return sum + (20.00 * nigiriQty);
                     return sum;
                 }, 0);
-                summaryHTML += `<div>Nigiri (${selectedNigiri}) - $${nigiriPrice.toFixed(2)}</div>`;
+                summaryHTML += `<div>${selectedNigiri}, ${nigiriAddons} x ${nigiriQty} - $${nigiriPrice.toFixed(2)}</div>`;
                 total += nigiriPrice;
             }
 
             // Handle Crispy Rice
             if (crispyQty > 0) {
                 const selectedCrispy = Array.from(document.querySelectorAll('input[name="crispy"]:checked')).map(input => {
-                    return `${input.value} x ${crispyQty}`;
+                    return input.value;
                 }).join(', ');
+                const crispyAddons = Array.from(document.querySelectorAll('input[name="crispy-addon"]:checked')).map(input => input.value).join(', ');
                 const crispyPrice = Array.from(document.querySelectorAll('input[name="crispy"]:checked')).reduce((sum, input) => {
                     if (input.value === 'Spicy Salmon Crispy Rice') return sum + (12.00 * crispyQty);
                     if (input.value === 'Spicy Tuna Crispy Rice') return sum + (12.00 * crispyQty);
                     return sum;
                 }, 0);
-                summaryHTML += `<div>Crispy Rice (${selectedCrispy}) - $${crispyPrice.toFixed(2)}</div>`;
+                summaryHTML += `<div>${selectedCrispy}, Add on ${crispyAddons} x ${crispyQty} - $${crispyPrice.toFixed(2)}</div>`;
                 total += crispyPrice;
             }
 
             // Handle Sashimi
             if (sashimiQty > 0) {
                 const selectedSashimi = Array.from(document.querySelectorAll('input[name="sashimi"]:checked')).map(input => {
-                    return `${input.value} x ${sashimiQty}`;
+                    return input.value;
                 }).join(', ');
                 const sashimiPrice = Array.from(document.querySelectorAll('input[name="sashimi"]:checked')).reduce((sum, input) => {
                     if (input.value === 'Salmon') return sum + (12.00 * sashimiQty);
@@ -186,19 +188,8 @@
                     if (input.value === 'Otoro Tuna') return sum + (20.00 * sashimiQty);
                     return sum;
                 }, 0);
-                summaryHTML += `<div>Sashimi (${selectedSashimi}) - $${sashimiPrice.toFixed(2)}</div>`;
+                summaryHTML += `<div>${selectedSashimi} x ${sashimiQty} - $${sashimiPrice.toFixed(2)}</div>`;
                 total += sashimiPrice;
-            }
-
-            // Handle add-ons for Crispy Rice and Nigiri
-            const crispyAddons = Array.from(document.querySelectorAll('input[name="crispy-addon"]:checked')).map(input => input.value).join(', ');
-            const nigiriAddons = Array.from(document.querySelectorAll('input[name="nigiri-addon"]:checked')).map(input => input.value).join(', ');
-
-            if (crispyAddons) {
-                summaryHTML += `<div>Crispy Rice Add-ons: ${crispyAddons}</div>`;
-            }
-            if (nigiriAddons) {
-                summaryHTML += `<div>Nigiri Add-ons: ${nigiriAddons}</div>`;
             }
 
             const totalAmount = document.getElementById('total-amount');
