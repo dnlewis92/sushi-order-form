@@ -203,6 +203,12 @@
             const customerName = document.getElementById('customer-name').value;
             const comments = document.getElementById('comments').value;
 
+            // Check if the customer name is provided
+            if (!customerName) {
+                alert('Please enter your name before submitting your order.');
+                return; // Prevent submission if name is not provided
+            }
+
             const orderData = {
                 customerName: customerName,
                 orderDetails: document.getElementById('summary-details').innerHTML,
