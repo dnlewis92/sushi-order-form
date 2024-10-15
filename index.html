@@ -7,7 +7,6 @@
     <style>
         body { font-family: Arial, sans-serif; background-color: #f9f7e8; padding: 20px; }
         h1 { text-align: center; }
-        .instructions { background-color: #e8f0fe; border: 1px solid #c1d3e0; padding: 15px; margin-bottom: 20px; }
         .roll-section { margin-bottom: 20px; }
         .section-title { font-size: 1.5em; font-weight: bold; margin-bottom: 10px; }
         .roll-item { margin-bottom: 10px; }
@@ -21,6 +20,7 @@
         .checkbox-item { margin-bottom: 10px; }
         .form-container { display: flex; flex-wrap: wrap; }
         .column { flex: 50%; padding: 10px; }
+        .instructions { font-size: 0.9em; color: gray; margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -28,9 +28,7 @@
     <h1>Rollin' With The Lewises Order Form</h1>
 
     <div class="instructions">
-        <h2>Welcome to Rollin' With The Lewises</h2>
-        <p>The Second Ever Kosher Sushi Restaurant in Hyde Park (after Shinju of course) is brought to you by the Lewises! 
-Disclaimer -  we are not hecschered by the CRC so eat at your own risk. We are excited to take your order and bring you delicious sushi!</p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque efficitur velit in eros pharetra, sit amet bibendum ex fermentum. Ut quis dolor eget arcu fringilla varius a sit amet dolor. Cras vel scelerisque dolor.
     </div>
 
     <div>
@@ -96,8 +94,8 @@ Disclaimer -  we are not hecschered by the CRC so eat at your own risk. We are e
 
     <script>
         const menuItems = [
-            { id: 'roll1', name: 'Jersey Boy', description: 'Vegetable Roll (Avocado, Cucumber)', price: 6.00 },
-            { id: 'roll2', name: 'Valley Girl', description: 'California Roll', price: 8.00 },
+            { id: 'roll1', name: 'Valley Girl', description: 'Vegetable Roll (Avocado, Cucumber)', price: 6.00 },
+            { id: 'roll2', name: 'Jersey Boy', description: 'California Roll', price: 8.00 },
             { id: 'roll3', name: 'Japanese Garden', description: 'Salmon Avocado', price: 9.00 },
             { id: 'roll4', name: 'The Grove', description: 'Salmon, Avocado, Cucumber', price: 9.00 },
             { id: 'roll5', name: 'Rocky Roll', description: 'Spicy Salmon Avocado', price: 9.50 },
@@ -134,70 +132,94 @@ Disclaimer -  we are not hecschered by the CRC so eat at your own risk. We are e
             let summaryHTML = '';
             let total = 0;
 
-            // Basic Rolls section
             menuItems.forEach(item => {
                 const qty = document.getElementById(`${item.id}-qty`).value;
                 if (qty > 0) {
-                    summaryHTML += `${qty} x ${item.name} - $${(item.price * qty).toFixed(2)}<br>`;
-                    total += item.price * qty;
+                    const itemTotal = item.price * qty;
+                    summaryHTML += `<div>${item.name} x ${qty} - $${itemTotal.toFixed(2)}</div>`;
+                    total += itemTotal;
                 }
             });
 
-            // Crispy Rice section
-            const crispyRiceBase = [];
-            if (document.getElementById('crispy-salmon').checked) crispyRiceBase.push('Spicy Salmon');
-            if (document.getElementById('crispy-tuna').checked) crispyRiceBase.push('Spicy Tuna');
-            const crispyRiceQty = document.getElementById('crispy-qty').value;
-            if (crispyRiceBase.length > 0 && crispyRiceQty > 0) {
-                const crispyRiceAddons = [];
-                if (document.getElementById('crispy-avocado').checked) crispyRiceAddons.push('Avocado');
-                if (document.getElementById('crispy-jalapeno').checked) crispyRiceAddons.push('Jalapeño');
-                summaryHTML += `${crispyRiceQty} x ${crispyRiceBase.join(', ')} Crispy Rice - $${(12 * crispyRiceQty).toFixed(2)}<br>`;
-                if (crispyRiceAddons.length > 0) {
-                    summaryHTML += `Add-ons: ${crispyRiceAddons.join(', ')}<br>`;
-                }
-                total += 12 * crispyRiceQty;
-            }
-
-            // Nigiri section
-            const nigiriChoices = [];
             const nigiriQty = document.getElementById('nigiri-qty').value;
-            if (document.getElementById('nigiri-salmon').checked) nigiriChoices.push('Salmon');
-            if (document.getElementById('nigiri-bluefin').checked) nigiriChoices.push('Bluefin Tuna');
-            if (document.getElementById('nigiri-otoro').checked) nigiriChoices.push('Otoro Tuna');
-            if (document.getElementById('nigiri-torched').checked) nigiriChoices.push('Torched');
-            if (nigiriChoices.length > 0 && nigiriQty > 0) {
-                summaryHTML += `${nigiriQty} x ${nigiriChoices.join(', ')} Nigiri - $${(10 * nigiriQty).toFixed(2)}<br>`;
-                total += 10 * nigiriQty;
-            }
-
-            // Sashimi section
-            const sashimiChoices = [];
+            const crispyQty = document.getElementById('crispy-qty').value;
             const sashimiQty = document.getElementById('sashimi-qty').value;
-            if (document.getElementById('sashimi-salmon').checked) sashimiChoices.push('Salmon');
-            if (document.getElementById('sashimi-tuna').checked) sashimiChoices.push('Tuna');
-            if (document.getElementById('sashimi-otoro').checked) sashimiChoices.push('Otoro Tuna');
-            if (sashimiChoices.length > 0 && sashimiQty > 0) {
-                summaryHTML += `${sashimiQty} x ${sashimiChoices.join(', ')} Sashimi - $${(12 * sashimiQty).toFixed(2)}<br>`;
-                total += 12 * sashimiQty;
+
+            if (nigiriQty > 0) {
+                const nigiriPrice = Array.from(document.querySelectorAll('input[name="nigiri"]:checked')).reduce((sum, input) => {
+                    if (input.value === 'Salmon') return sum + (10.00 * nigiriQty);
+                    if (input.value === 'Bluefin Tuna') return sum + (14.00 * nigiriQty);
+                    if (input.value === 'Otoro Tuna') return sum + (20.00 * nigiriQty);
+                    return sum;
+                }, 0);
+                summaryHTML += `<div>Nigiri x ${nigiriQty} - $${nigiriPrice.toFixed(2)}</div>`;
+                total += nigiriPrice;
             }
 
-            document.getElementById('summary-details').innerHTML = summaryHTML;
-            document.getElementById('total-amount').innerHTML = `Total: $${total.toFixed(2)}`;
+            if (crispyQty > 0) {
+                const crispyPrice = Array.from(document.querySelectorAll('input[name="crispy"]:checked')).reduce((sum, input) => {
+                    if (input.value === 'Spicy Salmon Crispy Rice') return sum + (12.00 * crispyQty);
+                    if (input.value === 'Spicy Tuna Crispy Rice') return sum + (12.00 * crispyQty);
+                    return sum;
+                }, 0);
+                summaryHTML += `<div>Crispy Rice x ${crispyQty} - $${crispyPrice.toFixed(2)}</div>`;
+                total += crispyPrice;
+            }
+
+            if (sashimiQty > 0) {
+                const sashimiPrice = Array.from(document.querySelectorAll('input[name="sashimi"]:checked')).reduce((sum, input) => {
+                    if (input.value === 'Salmon') return sum + (12.00 * sashimiQty);
+                    if (input.value === 'Tuna') return sum + (16.00 * sashimiQty);
+                    if (input.value === 'Otoro Tuna') return sum + (20.00 * sashimiQty);
+                    return sum;
+                }, 0);
+                summaryHTML += `<div>Sashimi x ${sashimiQty} - $${sashimiPrice.toFixed(2)}</div>`;
+                total += sashimiPrice;
+            }
+
+            const totalAmount = document.getElementById('total-amount');
+            totalAmount.innerHTML = `Total: $${total.toFixed(2)}`;
+
+            const summaryDetails = document.getElementById('summary-details');
+            summaryDetails.innerHTML = summaryHTML;
         }
 
-        document.addEventListener('input', updateSummary);
-        document.addEventListener('change', updateSummary);
-
-        document.getElementById('submit-btn').addEventListener('click', function() {
-            const name = document.getElementById('customer-name').value;
+        document.getElementById('submit-btn').addEventListener('click', () => {
+            const customerName = document.getElementById('customer-name').value;
             const comments = document.getElementById('comments').value;
-            // Logic to submit order can be implemented here
-            alert(`Order submitted! Thank you, ${name}.`);
+
+            const orderData = {
+                customerName: customerName,
+                orderDetails: document.getElementById('summary-details').innerHTML,
+                totalAmount: document.getElementById('total-amount').innerHTML,
+                comments: comments
+            };
+
+            // Send the order to Google Sheets
+            fetch('https://script.google.com/macros/s/AKfycbwTlIqENeumogb0NA6xDNyEHD7QWt0T1BbcxfXj7pQWT02XfTyOxdQtOcYCPS7gspWy0g/exec', {
+                method: 'POST',
+                body: JSON.stringify(orderData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Order submitted successfully!');
+                // Reset the form
+                document.getElementById('customer-name').value = '';
+                document.getElementById('comments').value = '';
+                document.querySelectorAll('.input-box').forEach(input => input.value = 0);
+                document.getElementById('summary-details').innerHTML = '';
+                document.getElementById('total-amount').innerHTML = '';
+            })
+            .catch(error => console.error('Error:', error));
         });
 
+        document.addEventListener('input', updateSummary);
+
+        // Initialize the menu items
         renderMenuItems();
     </script>
-
 </body>
 </html>
